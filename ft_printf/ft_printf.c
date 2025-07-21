@@ -6,9 +6,26 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 23:58:51 by mecetink          #+#    #+#             */
-/*   Updated: 2025/07/04 17:15:11 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/07/21 17:13:25 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file ft_printf.c
+ * @brief Implementation of the ft_printf function.
+ * This function is a custom implementation of the printf function,
+ * which formats and outputs data to the standard output.
+ * It supports various format specifiers for different data types.
+ * @note This function uses variadic arguments to handle different types of data.
+ * It processes format specifiers and calls appropriate handler functions for each type.
+ * * It returns the total number of characters printed.
+ * * It handles format specifiers such as %c, %s, %d, %i, %u, %x, %X, and %p.
+ * It also handles the % character itself.
+ * @return int The total number of characters printed, or -1 if an error occurs.
+ * @note This function assumes that the format string is valid and does not contain any unsupported format specifiers.
+ * @note This function handles some of the undefined behaviors of the standard printf function, such as
+ *       handling NULL pointers and invalid format specifiers.
+ */
 
 #include "ft_printf.h"
 
@@ -36,6 +53,17 @@ static ssize_t	handle_formatters(va_list args, int type)
 	}
 }
 
+/**
+ * @brief Handles errors and returns appropriate values.
+ * This function checks for NULL format strings and handles write errors.
+ * It also manages the end of variadic arguments if necessary.
+ * Purpose is to reduce code duplication due to Norm and improve readability.
+ * @param fmt The format string to be processed.
+ * @param wrtn The number of bytes written.
+ * @param count Pointer to the total count of characters printed.
+ * @param args The variadic arguments list.
+ * @return ssize_t Returns -1 on error, or 0 on success.
+ */
 static ssize_t	h_error(const char *fmt, ssize_t wrtn, int *count, va_list args)
 {
 	if (!fmt)
