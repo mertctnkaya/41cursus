@@ -18,7 +18,7 @@
 
 int		ft_printf(const char *fmt, ...);
 
-size_t	ft_strlen(const char *s);
+size_t	ft__strlen(const char *s);
 ssize_t	handle_percent(void);
 ssize_t	handle_char(va_list args);
 ssize_t	handle_str(va_list args);
@@ -28,9 +28,9 @@ ssize_t	handle_uint(va_list args);
 ssize_t	handle_hex(va_list args, int type);
 ssize_t	handle_ptr(va_list args);
 
-char	*ft_itoa(int n);
-ssize_t	ft_putstr(const char *s);
-char	*ft_strdup(const char *s);
+char	*ft__itoa(int n);
+ssize_t	ft__putstr(const char *s);
+char	*ft__strdup(const char *s);
 char	*ft_utoa_base(unsigned long num, const char *base);
 
 #endif

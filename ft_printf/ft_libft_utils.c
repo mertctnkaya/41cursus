@@ -13,14 +13,14 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 
-ssize_t	ft_putstr(const char *s)
+ssize_t	ft__putstr(const char *s)
 {
 	if (!s)
 		return (write(1, "(null)", 6));
-	return (write(1, s, ft_strlen(s)));
+	return (write(1, s, ft__strlen(s)));
 }
 
-static int	countdigit(long n)
+static int	count_digit(long n)
 {
 	int	digits;
 
@@ -35,7 +35,7 @@ static int	countdigit(long n)
 	return (digits);
 }
 
-char	*ft_itoa(int n)
+char	*ft__itoa(int n)
 {
 	char	*ret;
 	int		len;
@@ -46,7 +46,7 @@ char	*ft_itoa(int n)
 	is_negative = (num < 0);
 	if (is_negative)
 		num = -num;
-	len = countdigit(num) + is_negative;
+	len = count_digit(num) + is_negative;
 	ret = (char *) malloc(sizeof(char) * (len + 1));
 	if (!ret)
 		return (NULL);
@@ -63,7 +63,7 @@ char	*ft_itoa(int n)
 	return (ret);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft__strdup(const char *s)
 {
 	int		len;
 	int		i;
@@ -92,7 +92,7 @@ char	*ft_utoa_base(unsigned long num, const char *base)
 	int		i;
 
 	i = 20;
-	base_len = ft_strlen(base);
+	base_len = ft__strlen(base);
 	buffer[i--] = 0;
 	if (num == 0)
 		buffer[i--] = '0';
@@ -101,5 +101,5 @@ char	*ft_utoa_base(unsigned long num, const char *base)
 		buffer[i--] = base[num % base_len];
 		num /= base_len;
 	}
-	return (ft_strdup(&buffer[i + 1]));
+	return (ft__strdup(&buffer[i + 1]));
 }

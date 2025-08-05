@@ -18,10 +18,10 @@ ssize_t	handle_int(va_list args)
 	char	*str;
 	ssize_t	written;
 
-	str = ft_itoa((int)va_arg(args, int));
+	str = ft__itoa((int)va_arg(args, int));
 	if (!str)
 		return (-1);
-	written = ft_putstr(str);
+	written = ft__putstr(str);
 	free(str);
 	return (written);
 }
@@ -36,7 +36,7 @@ ssize_t	handle_uint(va_list args)
 	str = ft_utoa_base(num, "0123456789");
 	if (!str)
 		return (-1);
-	written = ft_putstr(str);
+	written = ft__putstr(str);
 	free(str);
 	return (written);
 }
@@ -54,7 +54,7 @@ ssize_t	handle_hex(va_list args, int type)
 		str = ft_utoa_base(num, "0123456789ABCDEF");
 	if (!str)
 		return (-1);
-	written = ft_putstr(str);
+	written = ft__putstr(str);
 	free(str);
 	return (written);
 }
@@ -68,12 +68,12 @@ ssize_t	handle_ptr(va_list args)
 
 	ptr = (unsigned long)va_arg(args, void *);
 	if (ptr == 0)
-		return (ft_putstr("(nil)"));
+		return (ft__putstr("(nil)"));
 	str = ft_utoa_base(ptr, "0123456789abcdef");
 	if (!str)
 		return (-1);
-	written0x = ft_putstr("0x");
-	written = ft_putstr(str);
+	written0x = ft__putstr("0x");
+	written = ft__putstr(str);
 	free(str);
 	if (written0x == -1 || written == -1)
 		return (-1);

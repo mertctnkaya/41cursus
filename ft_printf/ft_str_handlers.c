@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft__strlen(const char *s)
 {
 	const char	*start;
 
@@ -37,5 +37,5 @@ ssize_t	handle_char(va_list args)
 
 ssize_t	handle_str(va_list args)
 {
-	return (ft_putstr((char *)va_arg(args, char *)));
+	return (ft__putstr((char *)va_arg(args, char *)));
 }
