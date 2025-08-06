@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:04:50 by mecetink          #+#    #+#             */
-/*   Updated: 2025/08/06 16:41:58 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/08/06 20:19:21 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv)
 	sigaction(SIGUSR1, &sa, NULL);
 	write(1, "\e[33mSending message:\e[0m <", 27);
 	write(1, argv[2], ft_strlen(argv[2]));
-	write(1, ">\n", 5);
+	write(1, ">\n", 3);
 	send_str(pid, argv[2]);
 	write(1, "\e[32mMessage sent successfully!\e[0m\n", 36);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:23:13 by mecetink          #+#    #+#             */
-/*   Updated: 2025/08/06 16:39:44 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:17:56 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 		bit = 0;
 		c = 0;
 		if (kill(info->si_pid, SIGUSR1) == -1)
-			write(2, "Error: Failed to send ACK\n", 27);
+			write(2, "\e[31mError: Failed to send ACK\e[0m\n", 27);
 	}
 }
 

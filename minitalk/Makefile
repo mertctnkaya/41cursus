@@ -9,14 +9,15 @@ server: server.c utils.c
 	./server
 
 client: client.c utils.c
+	rm -f client
 	$(CC) client.c utils.c -o client
 
-bonusserver: server_bonus.c
+bs: server_bonus.c
 	rm -f server_bonus
 	$(CC) server_bonus.c utils.c -o server_bonus
 	./server_bonus
 
-bonusclient: client_bonus.c
+bc: client_bonus.c
 	rm -f client_bonus
 	$(CC) client_bonus.c utils.c -o client_bonus
 
@@ -25,4 +26,4 @@ clean:
 
 re: clean server client
 
-.PHONY: all clean re server client
+.PHONY: all clean re server client bc bs
