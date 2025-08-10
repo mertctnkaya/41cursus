@@ -6,19 +6,28 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:23:13 by mecetink          #+#    #+#             */
-/*   Updated: 2025/08/06 23:17:56 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:53:00 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-static void	sig_handler(int sig, siginfo_t *info, void *context)
+static void	write_pid(int pid)
+{
+	if (pid >= 10)
+		write_pid(pid / 10);
+	write(1, &((char []){'0' + (pid % 10)}), 1);
+}
+
+static void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 {
 	static unsigned char	c = 0;
 	static int				bit = 0;
 	static pid_t			last_pid = 0;
 
-	(void)context;
+	(void)ucontext;
 	if (last_pid != info->si_pid)
 	{
 		c = 0;
@@ -30,12 +39,16 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 	{
 		write(1, &c, 1);
 		if (c == '\0')
+		{
 			write(1, "\n", 1);
+			if (kill(info->si_pid, SIGUSR2) == -1)
+				write(2, "Error: Failed to end transmission\n", 34);
+		}
 		bit = 0;
 		c = 0;
-		if (kill(info->si_pid, SIGUSR1) == -1)
-			write(2, "\e[31mError: Failed to send ACK\e[0m\n", 27);
 	}
+	if (kill(info->si_pid, SIGUSR1) == -1)
+		write(2, "Error: Failed to send ACK\n", 26);
 }
 
 int	main(void)

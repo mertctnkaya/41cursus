@@ -6,26 +6,26 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:04:50 by mecetink          #+#    #+#             */
-/*   Updated: 2025/08/06 20:19:21 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:55:48 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-static volatile sig_atomic_t	g_ack = 0;
+static sig_atomic_t	g_ack = 0;
 
-static void	handle_ack(int sig __attribute__((unused)))
+static int	ft_atoi(const char *str)
 {
-	g_ack = 1;
-}
+	int	result;
 
-static void	send_bit(int pid, int bit)
-{
-	if (bit)
-		kill(pid, SIGUSR1);
-	else
-		kill(pid, SIGUSR2);
-	usleep(80);
+	result = 0;
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	while (*str >= '0' && *str <= '9')
+		result = result * 10 + (*str++ - '0');
+	return (result);
 }
 
 static void	send_char(int pid, unsigned char c)
@@ -35,12 +35,28 @@ static void	send_char(int pid, unsigned char c)
 	i = 8;
 	while (i--)
 	{
-		send_bit(pid, (c >> i) & 1);
-		usleep(50);
+		if ((c >> i) & 1)
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				exit(EXIT_FAILURE);
+		}
+		else
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				exit(EXIT_FAILURE);
+		}
+		while (!g_ack)
+			;
+		g_ack = 0;
 	}
-	while (!g_ack)
-		pause();
-	g_ack = 0;
+}
+
+static void	handle_ack(int sig __attribute__((unused)))
+{
+	if (sig == SIGUSR1)
+		g_ack = 1;
+	else if (sig == SIGUSR2)
+		write(1, "[ACK]: Message sent successfully\n", 34);
 }
 
 static void	send_str(int pid, const char *str)
@@ -49,36 +65,28 @@ static void	send_str(int pid, const char *str)
 		send_char(pid, *str++);
 	send_char(pid, '\0');
 }
-
 int	main(int argc, char **argv)
 {
 	int					pid;
 	struct sigaction	sa;
 
-	if (argc != 3)
+	if (argc != 3 || argv[1][0] == '\0' || argv[2][0] == '\0')
 	{
-		write(2, "\e[31mUsage: ./client_bonus [pid] [message]\e[0m\n", 48);
-		return (1);
+		write(2, "Usage: ./client [pid] [message]\n", 32);
+		exit(EXIT_FAILURE);
 	}
 	pid = ft_atoi(argv[1]);
-	if (pid <= 0)
+	if (pid <= 0 || kill(pid, 0) == -1)
 	{
-		write(2, "\e[31mError: Invalid PID\e[0m\n", 29);
-		return (1);
+		write(2, "Error: Invalid PID or doesn't exist\n", 36);
+		exit(EXIT_FAILURE);
 	}
-	if (kill(pid, 0) == -1)
-	{
-		write(2, "\e[31mError: PID does not exist\e[0m\n", 36);
-		return (1);
-	}
-	sa.sa_handler = handle_ack;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGUSR1, &sa, NULL);
-	write(1, "\e[33mSending message:\e[0m <", 27);
-	write(1, argv[2], ft_strlen(argv[2]));
-	write(1, ">\n", 3);
+	sa.sa_flags = 0;
+	sa.sa_handler = handle_ack;
+	if (sigaction(SIGUSR1, &sa, NULL) == -1
+	|| sigaction(SIGUSR2, &sa, NULL) == -1)
+		exit(EXIT_FAILURE);
 	send_str(pid, argv[2]);
-	write(1, "\e[32mMessage sent successfully!\e[0m\n", 36);
 	return (0);
 }
