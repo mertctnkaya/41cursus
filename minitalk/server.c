@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:55:14 by mecetink          #+#    #+#             */
-/*   Updated: 2025/08/10 15:52:53 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/08/15 11:32:59 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	main(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_sigaction = sig_handler;
 	sa.sa_flags = SA_SIGINFO | SA_RESTART;
-	if (sigaction(SIGUSR1, &sa, NULL) == -1 ||
-	    sigaction(SIGUSR2, &sa, NULL) == -1)
+	if (sigaction(SIGUSR1, &sa, NULL) == -1
+		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 		exit(EXIT_FAILURE);
 	while (1)
 		pause();

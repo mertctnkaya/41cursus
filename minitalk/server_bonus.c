@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 13:23:13 by mecetink          #+#    #+#             */
-/*   Updated: 2025/08/10 15:53:00 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/08/15 11:43:59 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ static void	write_pid(int pid)
 	write(1, &((char []){'0' + (pid % 10)}), 1);
 }
 
+static void	reset_state(pid_t pid, pid_t *lpid, unsigned char *c, int *bit)
+{
+	*lpid = pid;
+	*c = 0;
+	*bit = 0;
+}
+
 static void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 {
 	static unsigned char	c = 0;
@@ -29,11 +36,7 @@ static void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 
 	(void)ucontext;
 	if (last_pid != info->si_pid)
-	{
-		c = 0;
-		bit = 0;
-		last_pid = info->si_pid;
-	}
+		reset_state(info->si_pid, &last_pid, &c, &bit);
 	c = (c << 1) | (sig == SIGUSR1);
 	if (++bit == 8)
 	{
@@ -61,8 +64,9 @@ int	main(void)
 	sa.sa_sigaction = sig_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO | SA_RESTART;
-	sigaction(SIGUSR1, &sa, 0);
-	sigaction(SIGUSR2, &sa, 0);
+	if (sigaction(SIGUSR1, &sa, NULL) == -1
+		|| sigaction(SIGUSR2, &sa, NULL) == -1)
+		exit(EXIT_FAILURE);
 	while (1)
 		pause();
 }

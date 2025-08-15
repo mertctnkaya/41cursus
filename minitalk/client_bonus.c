@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 14:04:50 by mecetink          #+#    #+#             */
-/*   Updated: 2025/08/10 15:55:48 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/08/15 11:38:46 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static sig_atomic_t	g_ack = 0;
+static int	g_ack = 0;
 
 static int	ft_atoi(const char *str)
 {
@@ -65,6 +65,7 @@ static void	send_str(int pid, const char *str)
 		send_char(pid, *str++);
 	send_char(pid, '\0');
 }
+
 int	main(int argc, char **argv)
 {
 	int					pid;
@@ -85,7 +86,7 @@ int	main(int argc, char **argv)
 	sa.sa_flags = 0;
 	sa.sa_handler = handle_ack;
 	if (sigaction(SIGUSR1, &sa, NULL) == -1
-	|| sigaction(SIGUSR2, &sa, NULL) == -1)
+		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 		exit(EXIT_FAILURE);
 	send_str(pid, argv[2]);
 	return (0);
