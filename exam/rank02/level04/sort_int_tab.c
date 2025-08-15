@@ -1,8 +1,8 @@
-#include "../lib.h"
+#include "../../lib.h"
 
 void sort_int_tab(int *tab, unsigned int size)
 {
-    unsigned int i = 0, j = 0;
+	unsigned int i = 0, j = 0;
 	int temp;
 
 	while (i < size - 1)

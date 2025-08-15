@@ -1,4 +1,4 @@
-#include "../lib.h"
+#include "../../lib.h"
 
 void putnbr(int num)
 {
@@ -22,4 +22,4 @@ int main(int ac _u, char **av _u)
 		printf("\n");
 	}
 	return 0;
-} 
+}

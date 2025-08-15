@@ -1,10 +1,10 @@
-#include "../lib.h"
+#include "../../lib.h"
 
 char tolow(char c)
 {
 	if (c >= 'A' && c <= 'Z')
-        return (c + 32);
-    return (c);
+		return (c + 32);
+	return (c);
 }
 
 int isalpha(int a)
@@ -15,10 +15,10 @@ int isalpha(int a)
 int main(int ac, char **av)
 {
 	if (ac != 2)
-    {
-        write(1, "\n", 1);
-        return (0);
-    }
+	{
+		write(1, "\n", 1);
+		return (0);
+	}
 	int i = -1;
 	while (av[1][++i])
 	{
@@ -33,5 +33,5 @@ int main(int ac, char **av)
 			write(1, &av[1][i], 1);
 		}
 	}
-	return 0;	
+	return 0;
 }

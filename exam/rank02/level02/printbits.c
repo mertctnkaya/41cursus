@@ -1,10 +1,10 @@
-#include "../lib.h"
+#include "../../lib.h"
 
 void printbits(unsigned char n)
 {
 	int byte = 8;
 	while (byte--)
-		printf("%d", (n >> byte) & 1);
+		write(1, &(char []){(((n >> byte) & 1) + 48)}, 1);
 }
 
 int main()
