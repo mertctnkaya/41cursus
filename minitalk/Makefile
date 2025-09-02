@@ -1,29 +1,32 @@
-CC = cc -Wall -Wextra -Werror
-SRCS = server.c client.c
+NAME	= client server
+BNAME	= client_bonus server_bonus
+CC		= cc -Wall -Wextra -Werror
 
-all: server client
+SRCS	= server.c client.c
+BSRCS	= server_bonus.c client_bonus.c
 
-server: server.c
-	rm -f server
-	$(CC) server.c -o server
-	./server
+OBJS	= $(SRCS:.c=.o)
+BOBJS	= $(BSRCS:.c=.o)
 
-client: client.c
-	rm -f client
-	$(CC) client.c -o client
+all: $(NAME)
 
-bs: server_bonus.c
-	rm -f server_bonus
-	$(CC) server_bonus.c -o server_bonus
-	./server_bonus
+bonus: $(NAME) $(BNAME)
 
-bc: client_bonus.c
-	rm -f client_bonus
-	$(CC) client_bonus.c -o client_bonus
+$(NAME): $(OBJS)
+	$(CC) server.o -o server
+	$(CC) client.o -o client
+
+$(BNAME): $(BOBJS)
+	$(CC) server_bonus.o -o server_bonus
+	$(CC) client_bonus.o -o client_bonus
+
+%.o: %.c
+	$(CC) -c $< -o $@
 
 clean:
-	rm -f server client server_bonus client_bonus o out a.out
+	@rm -f $(OBJS) $(BOBJS)
 
-re: clean server client
+fclean: clean
+	@rm -f client server client_bonus server_bonus
 
-.PHONY: all clean re server client bc bs
+.PHONY: all bonus clean fclean re
