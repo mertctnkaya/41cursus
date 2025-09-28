@@ -1,8 +1,8 @@
 #include "../push_swap.h"
 
-void pa(t_node **a, t_node **b, int print)
+void pa(t_item **a, t_item **b, int cout)
 {
-	t_node *temp;
+	t_item *temp;
 
 	if (!*b)
 		return;
@@ -14,13 +14,13 @@ void pa(t_node **a, t_node **b, int print)
 	if (*a)
 		(*a)->prev = temp;
 	*a = temp;
-	if (print)
+	if (cout)
 		write(1, "pa\n", 3);
 }
 
-void pb(t_node **a, t_node **b, int print)
+void pb(t_item **a, t_item **b, int cout)
 {
-	t_node *temp;
+	t_item *temp;
 
 	if (!*a)
 		return;
@@ -32,6 +32,6 @@ void pb(t_node **a, t_node **b, int print)
 	if (*b)
 		(*b)->prev = temp;
 	*b = temp;
-	if (print)
+	if (cout)
 		write(1, "pb\n", 3);
 }

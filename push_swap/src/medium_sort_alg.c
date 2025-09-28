@@ -1,9 +1,9 @@
 #include "../push_swap.h"
 
-static void bring_to_top(t_node **a, int index, int size_a)
+static void bring_to_top(t_item **a, int index, int size_a)
 {
 	int pos;
-	t_node *temp;
+	t_item *temp;
 
 	pos = 0;
 	temp = *a;
@@ -26,11 +26,28 @@ static void bring_to_top(t_node **a, int index, int size_a)
 	}
 }
 
-void sort_4(t_stack *s)
+static int	check_special_4(t_stack *s)
+{
+	if (match_case(s->a, 3, 2, 0, 1))
+		return (do_operations(s, 8));
+	if (match_case(s->a, 0, 2, 3, 1))
+		return (do_operations(s, 4 | 1));
+	if (match_case(s->a, 0, 3, 1, 2))
+		return (do_operations(s, 1 | 2));
+	if (match_case(s->a, 3, 1, 2, 0))
+		return (do_operations(s, 4 | 1 | 2));
+	return (0);
+}
+
+void	sort_4(t_stack *s)
 {
 	if (is_sorted(s->a))
-		return;
-	bring_to_top(&s->a, 3, s->size_a);
+		return ;
+	if (check_special_4(s))
+		return ;
+	bring_to_top(&s->a, 0, s->size_a);
+	if (is_sorted(s->a))
+		return ;
 	pb(&s->a, &s->b, 1);
 	s->size_a--;
 	s->size_b++;
@@ -38,10 +55,9 @@ void sort_4(t_stack *s)
 	pa(&s->a, &s->b, 1);
 	s->size_a++;
 	s->size_b--;
-	ra(&s->a, 1);
 }
 
-void sort_5(t_stack *s)
+static void	push_smallest_two(t_stack *s)
 {
 	bring_to_top(&s->a, 0, s->size_a);
 	pb(&s->a, &s->b, 1);
@@ -51,7 +67,16 @@ void sort_5(t_stack *s)
 	pb(&s->a, &s->b, 1);
 	s->size_a--;
 	s->size_b++;
+}
+
+void	sort_5(t_stack *s)
+{
+	if (is_sorted(s->a))
+		return ;
+	push_smallest_two(s);
 	sort_3(&s->a);
+	if (s->b->index < s->b->next->index)
+		sa(&s->b, 1);
 	pa(&s->a, &s->b, 1);
 	s->size_a++;
 	s->size_b--;

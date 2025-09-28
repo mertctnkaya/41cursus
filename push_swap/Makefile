@@ -11,13 +11,14 @@ SRC_FILES	= \
 	src/small_sort_alg.c \
 	src/medium_sort_alg.c \
 	src/large_sort_alg.c \
-	src/sort_main.c 
+	src/utils.c
 	
 OBJ_FILES	= $(SRC_FILES:.c=.o)
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ_FILES)
+#$(NAME):
 	$(CC) $(OBJ_FILES) -o $(NAME)
 
 %.o:		%.c

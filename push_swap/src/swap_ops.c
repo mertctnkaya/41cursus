@@ -6,14 +6,13 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 20:43:26 by mecetink          #+#    #+#             */
-/*   Updated: 2025/09/22 21:17:17 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/09/26 22:13:08 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// sa (swap a): Yığın a'nın ilk 2 elemanını değiştirir.
-void sa(t_node **a, int print)
+void sa(t_item **a, int cout)
 {
 	int temp_value;
 	int temp_index;
@@ -26,12 +25,11 @@ void sa(t_node **a, int print)
 	(*a)->index = (*a)->next->index;
 	(*a)->next->value = temp_value;
 	(*a)->next->index = temp_index;
-	if (print)
+	if (cout)
 		write(1, "sa\n", 3);
 }
 
-// sb (swap b): Yığın b'nin ilk 2 elemanını değiştirir.
-void sb(t_node **b, int print)
+void sb(t_item **b, int cout)
 {
 	int temp_value;
 	int temp_index;
@@ -44,17 +42,16 @@ void sb(t_node **b, int print)
 	(*b)->index = (*b)->next->index;
 	(*b)->next->value = temp_value;
 	(*b)->next->index = temp_index;
-	if (print)
+	if (cout)
 		write(1, "sb\n", 3);
 }
 
-// ss: sa ve sb'yi aynı anda yapar.
-void ss(t_node **a, t_node **b, int print)
+void ss(t_item **a, t_item **b, int cout)
 {
 	if (!*a || !(*a)->next || !*b || !(*b)->next)
 		return;
 	sa(a, 0);
 	sb(b, 0);
-	if (print)
+	if (cout)
 		write(1, "ss\n", 3);
 }

@@ -6,17 +6,16 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 20:44:17 by mecetink          #+#    #+#             */
-/*   Updated: 2025/09/22 21:17:17 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:13:43 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// rra (reverse rotate a): Yığın a'nın tüm elemanlarını 1 aşağı kaydırır.
-void rra(t_node **a, int print)
+void rra(t_item **a, int cout)
 {
-	t_node *head;
-	t_node *tail;
+	t_item *head;
+	t_item *tail;
 
 	if (!*a || !(*a)->next)
 		return;
@@ -29,15 +28,14 @@ void rra(t_node **a, int print)
 	tail->next = head;
 	head->prev = tail;
 	*a = tail;
-	if (print)
+	if (cout)
 		write(1, "rra\n", 4);
 }
 
-// rrb (reverse rotate b): Yığın b'nin tüm elemanlarını 1 aşağı kaydırır.
-void rrb(t_node **b, int print)
+void rrb(t_item **b, int cout)
 {
-	t_node *head;
-	t_node *tail;
+	t_item *head;
+	t_item *tail;
 
 	if (!*b || !(*b)->next)
 		return;
@@ -50,17 +48,16 @@ void rrb(t_node **b, int print)
 	tail->next = head;
 	head->prev = tail;
 	*b = tail;
-	if (print)
+	if (cout)
 		write(1, "rrb\n", 4);
 }
 
-// rrr: rra ve rrb'yi aynı anda yapar.
-void rrr(t_node **a, t_node **b, int print)
+void rrr(t_item **a, t_item **b, int cout)
 {
 	if (!*a || !(*a)->next || !*b || !(*b)->next)
 		return;
 	rra(a, 0);
 	rrb(b, 0);
-	if (print)
+	if (cout)
 		write(1, "rrr\n", 4);
 }
