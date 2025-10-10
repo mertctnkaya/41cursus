@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 22:32:11 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/07 22:32:12 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/10 12:36:08 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void pa(t_item **a, t_item **b, int cout)
+void	pa(t_item **a, t_item **b, int cout)
 {
-	t_item *temp;
+	t_item	*temp;
 
 	if (!*b)
-		return;
+		return ;
 	temp = *b;
 	*b = (*b)->next;
 	if (*b)
@@ -30,12 +30,12 @@ void pa(t_item **a, t_item **b, int cout)
 		write(1, "pa\n", 3);
 }
 
-void pb(t_item **a, t_item **b, int cout)
+void	pb(t_item **a, t_item **b, int cout)
 {
-	t_item *temp;
+	t_item	*temp;
 
 	if (!*a)
-		return;
+		return ;
 	temp = *a;
 	*a = (*a)->next;
 	if (*a)

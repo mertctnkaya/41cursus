@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:48:24 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/09 21:39:29 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/10 12:33:58 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void free_stack(t_item *stack)
+static void	free_stack(t_item *stack)
 {
-	t_item *temp;
+	t_item	*temp;
 
 	if (!stack)
-		return;
+		return ;
 	while (stack)
 	{
 		temp = stack->next;
@@ -26,10 +26,10 @@ static void free_stack(t_item *stack)
 	}
 }
 
-static void push_swap(t_stack *s)
+static void	push_swap(t_stack *s)
 {
 	if (s->total_size <= 1)
-		return;
+		return ;
 	if (s->total_size == 2)
 		sort_2(&s->a);
 	else if (s->total_size == 3)
@@ -42,9 +42,9 @@ static void push_swap(t_stack *s)
 		quick_sort(s);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stack s;
+	t_stack	s;
 
 	if (argc == 1)
 		exit(1);

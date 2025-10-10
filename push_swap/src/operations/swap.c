@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 20:43:26 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/07 22:32:06 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/10 12:37:12 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void sa(t_item **a, int cout)
+void	sa(t_item **a, int cout)
 {
-	int temp_value;
-	int temp_index;
+	int	temp_value;
+	int	temp_index;
 
 	if (!*a || !(*a)->next)
-		return;
+		return ;
 	temp_value = (*a)->value;
 	temp_index = (*a)->index;
 	(*a)->value = (*a)->next->value;
@@ -29,13 +29,13 @@ void sa(t_item **a, int cout)
 		write(1, "sa\n", 3);
 }
 
-void sb(t_item **b, int cout)
+void	sb(t_item **b, int cout)
 {
-	int temp_value;
-	int temp_index;
+	int	temp_value;
+	int	temp_index;
 
 	if (!*b || !(*b)->next)
-		return;
+		return ;
 	temp_value = (*b)->value;
 	temp_index = (*b)->index;
 	(*b)->value = (*b)->next->value;
@@ -46,10 +46,10 @@ void sb(t_item **b, int cout)
 		write(1, "sb\n", 3);
 }
 
-void ss(t_item **a, t_item **b, int cout)
+void	ss(t_item **a, t_item **b, int cout)
 {
 	if (!*a || !(*a)->next || !*b || !(*b)->next)
-		return;
+		return ;
 	sa(a, 0);
 	sb(b, 0);
 	if (cout)

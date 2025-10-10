@@ -3,24 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   quicksort_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:09:52 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/07 22:32:26 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/10 14:50:06 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* sort_quick.c
-** partition + restore (B -> A) mantığını içeren quick benzeri implementasyon
-*/
-
 #include "../../push_swap.h"
 
-/* partition: pivot'tan küçük veya eşit olanları B'ye atar, büyükleri A'da döndürür */
-void partition(t_stack *s, int pivot, int size)
+static void	sort_small(t_stack *s)
 {
-	int i;
+	if (s->size_a == 2)
+		sort_2(&s->a);
+	else if (s->size_a == 3)
+		sort_3(&s->a);
+	else if (s->size_a == 4)
+		sort_4(s);
+	else if (s->size_a == 5)
+		sort_5(s);
+}
 
+/* quick_partition.c */
+
+void	partition(t_stack *s, int pivot, int size)
+{
+	int	i;
+	int	threshold;
+
+	/* threshold ile çok küçükleri B'nin altına gönder */
+	threshold = pivot - (size / 4); /* heuristic: pivot-12.5% */
 	i = 0;
 	while (i < size)
 	{
@@ -29,6 +41,9 @@ void partition(t_stack *s, int pivot, int size)
 			pb(&s->a, &s->b, 1);
 			s->size_a--;
 			s->size_b++;
+			/* eğer yeni üst elemana göre çok küçükse, rb ile aşağı at */
+			if (s->b && s->b->index <= threshold)
+				rb(&s->b, 1);
 		}
 		else
 			ra(&s->a, 1);
@@ -36,45 +51,40 @@ void partition(t_stack *s, int pivot, int size)
 	}
 }
 
-/* rotate B to bring position 'pos' to top using minimal rotations */
-static void rotate_b_to_top(t_stack *s, int pos)
+
+static void	rotate_b_to_top(t_stack *s, int pos)
 {
-	int moves;
+	int	moves;
 
 	if (pos <= s->size_b / 2)
 	{
 		while (pos-- > 0)
-			rb(&s->b, 1); /* rotate up */
+			rb(&s->b, 1);
 	}
 	else
 	{
 		moves = s->size_b - pos;
 		while (moves-- > 0)
-			rrb(&s->b, 1); /* rotate down */
+			rrb(&s->b, 1);
 	}
 }
 
-/* restore_sorted_from_b:
-** - B'deki en küçükleri tek tek bul, B'de üstte getir, pa + ra ile A'nın altına ekle (append)
-** - tüm küçükler append edildikten sonra A'nın en küçük elemanını başa getirmek için son bir döndürme yap
-*/
-void restore_sorted_from_b(t_stack *s)
+void	restore_sorted_from_b(t_stack *s)
 {
-	int pos;
-	int min_pos;
+	int	pos;
+	int	min_pos;
 
-	/* while B dolu iken: en küçük elemanı getir, A'ya pa, sonra ra ile altına koy */
 	while (s->size_b > 0)
 	{
-		pos = find_min_pos(s->b); /* B içindeki min pozisyonunu bul */
-		rotate_b_to_top(s, pos);  /* min'i B'nin tepesine getir */
-		pa(&s->a, &s->b, 1);	  /* B->A */
+		pos = find_min_pos(s->b);
+		rotate_b_to_top(s, pos);
+		pa(&s->a, &s->b, 1);
 		s->size_a++;
 		s->size_b--;
-		ra(&s->a, 1); /* pa ile gelen küçük elemanı A'nın altına koy */
+		ra(&s->a, 1);
 	}
-	/* şimdi A = [oldA..., appended smalls in ascending order]
-	** en küçük öğe artık A'nın bir yerinde; onu başa getir */
+	if (is_sorted(s->a))
+		return ;
 	min_pos = find_min_pos(s->a);
 	if (min_pos <= s->size_a / 2)
 	{
@@ -89,17 +99,74 @@ void restore_sorted_from_b(t_stack *s)
 	}
 }
 
-/* quick sort ana fonksiyonu: pivot seç, partition, recursive, restore */
-void quick_sort(t_stack *s)
+int	find_max_pos(t_item *stack)
 {
-	int pivot;
-	int size;
+	int	pos;
+	int	max_pos;
+	int	max;
+	t_item *cur;
+
+	if (!stack)
+		return (0);
+	cur = stack;
+	max = cur->index;
+	max_pos = 0;
+	pos = 0;
+	while (cur)
+	{
+		if (cur->index > max)
+		{
+			max = cur->index;
+			max_pos = pos;
+		}
+		cur = cur->next;
+		pos++;
+	}
+	return (max_pos);
+}
+
+void	restore_by_max(t_stack *s)
+{
+	int	pos;
+
+	while (s->size_b > 0)
+	{
+		pos = find_max_pos(s->b);
+		rotate_b_to_top(s, pos);
+		pa(&s->a, &s->b, 1);
+		s->size_a++;
+		s->size_b--;
+	}
+	if (!is_sorted(s->a))
+	{
+		int min_pos = find_min_pos(s->a);
+		if (min_pos <= s->size_a / 2)
+			while (min_pos-- > 0)
+				ra(&s->a, 1);
+		else
+		{
+			min_pos = s->size_a - min_pos;
+			while (min_pos-- > 0)
+				rra(&s->a, 1);
+		}
+	}
+}
+
+void	quick_sort(t_stack *s)
+{
+	int	pivot;
+	int	size;
 
 	if (is_sorted(s->a))
-		return;
+		return ;
+	if (s->size_a <= 5)
+	{
+		sort_small(s);
+		return ;
+	}
 	size = s->size_a;
-	pivot = get_pivot(s->a, size); /* median pivot */
-	partition(s, pivot, size);	   /* küçükleri B'ye at */
-	quick_sort(s);				   /* A'daki büyükleri recursive sırala */
-	restore_sorted_from_b(s);	   /* B'den düzgün şekilde geri getir */
+	pivot = get_pivot(s->a, size);
+	partition(s, pivot, size);
+	quick_sort(s);
+	restore_by_max(s);
 }

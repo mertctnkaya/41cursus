@@ -1,4 +1,5 @@
 NAME		= push_swap
+BONUS_EXE	= 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 DEBUG		= 0
@@ -26,6 +27,8 @@ OBJ_DIR		= objs
 OBJ_FILES	= $(SRC_FILES:src/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
+
+bonus: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME)
