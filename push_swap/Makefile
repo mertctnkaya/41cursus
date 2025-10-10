@@ -1,35 +1,45 @@
 NAME		= push_swap
-CC			= cc -Wall -Wextra -Werror
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+DEBUG		= 0
+
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g -fsanitize=address
+endif
 
 SRC_FILES	= \
-	src/main.c \
-	src/validation.c \
-	src/swap_ops.c \
-	src/push_ops.c \
-	src/rotate_ops.c \
-	src/rrotate_ops.c \
-	src/small_sort_alg.c \
-	src/medium_sort_alg.c \
-	src/large_sort_alg.c \
-	src/utils.c
-	
-OBJ_FILES	= $(SRC_FILES:.c=.o)
+	src/main.c					\
+	src/validation.c			\
+	src/utils.c					\
+	\
+	src/operations/swap.c		\
+	src/operations/push.c		\
+	src/operations/rotate.c		\
+	src/operations/rrotate.c	\
+	\
+	src/sorts/small.c			\
+	src/sorts/medium.c			\
+	src/sorts/quicksort_main.c	\
+	src/sorts/quicksort_utils.c
 
-all:		$(NAME)
+OBJ_DIR		= objs
+OBJ_FILES	= $(SRC_FILES:src/%.c=$(OBJ_DIR)/%.o)
 
-$(NAME):	$(OBJ_FILES)
-#$(NAME):
-	$(CC) $(OBJ_FILES) -o $(NAME)
+all: $(NAME)
 
-%.o:		%.c
-	$(CC) -c $< -o $@
+$(NAME): $(OBJ_FILES)
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME)
+
+$(OBJ_DIR)/%.o: src/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ_FILES)
+	rm -rf $(OBJ_DIR)
 
-fclean:		clean
-	@rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re

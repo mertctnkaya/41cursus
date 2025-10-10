@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:31:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/09/29 01:30:46 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/03 20:10:12 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,20 @@ typedef struct s_stack
 	int total_size;
 } t_stack;
 
+void quick_sort(t_stack *s);
+int get_pivot(t_item *a, int size);
+void partition(t_stack *s, int pivot, int size);
+int	find_min_pos(t_item *stack);
+
 t_item *parse_and_create_stack(int argc, char **argv, int *size);
 void assign_index(t_item **stack, int size);
 int is_sorted(t_item *stack);
 
 void raise_error();
 void free_stack(t_item *stack);
-long ft_atol_check(const char *str);
-int	match_case(t_item *a, int i0, int i1, int i2, int i3);
-int	do_operations(t_stack *s, int op);
+long atol_check(const char *str);
+int match_case(t_item *a, int *n);
+int do_operations(t_stack *s, int op);
 
 void sa(t_item **a, int cout);
 void sb(t_item **b, int cout);

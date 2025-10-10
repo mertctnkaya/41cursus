@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   small_sort_alg.c                                   :+:      :+:    :+:   */
+/*   small.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 20:52:49 by mecetink          #+#    #+#             */
-/*   Updated: 2025/09/29 00:58:04 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/07 22:32:31 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../push_swap.h"
 
 void sort_2(t_item **a)
 {
@@ -18,14 +18,14 @@ void sort_2(t_item **a)
 		sa(a, 1);
 }
 
-void	sort_3(t_item **a)
+void sort_3(t_item **a)
 {
-	int	top;
-	int	mid;
-	int	bot;
+	int top;
+	int mid;
+	int bot;
 
 	if (is_sorted(*a))
-		return ;
+		return;
 	top = (*a)->index;
 	mid = (*a)->next->index;
 	bot = (*a)->next->next->index;

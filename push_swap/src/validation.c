@@ -6,15 +6,15 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/09/26 23:13:08 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/07 22:33:09 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_item*	new_item(int num)
+t_item *new_item(int num)
 {
-	t_item* new;
+	t_item *new;
 
 	new = (t_item *)malloc(sizeof(t_item));
 	if (!new)
@@ -39,10 +39,22 @@ static void check_duplicates(t_item *stack, int value)
 	}
 }
 
+static void append_item(t_item **a, t_item **current, t_item *item)
+{
+	if (!*a)
+		*a = item;
+	else
+	{
+		(*current)->next = item;
+		item->prev = *current;
+	}
+	*current = item;
+}
 t_item *parse_and_create_stack(int argc, char **argv, int *size)
 {
 	t_item *a;
 	t_item *current;
+	t_item *new;
 	long num;
 	int i;
 
@@ -54,19 +66,12 @@ t_item *parse_and_create_stack(int argc, char **argv, int *size)
 	*size = 0;
 	while (i < argc)
 	{
-		num = ft_atol_check(argv[i]);
+		num = atol_check(argv[i]);
 		check_duplicates(a, (int)num);
-		t_item *item = new_item((int)num);
-		if (!item)
-			raise_error("Stack Create Alloc Error");
-		if (!a)
-			a = item;
-		else
-		{
-			current->next = item;
-			item->prev = current;
-		}
-		current = item;
+		new = new_item((int)num);
+		if (!new)
+			raise_error();
+		append_item(&a, &current, new);
 		(*size)++;
 		i++;
 	}

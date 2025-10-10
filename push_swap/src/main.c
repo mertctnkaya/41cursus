@@ -6,13 +6,13 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:48:24 by mecetink          #+#    #+#             */
-/*   Updated: 2025/09/29 01:26:44 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/09 21:39:29 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void free_stack(t_item *stack)
+static void free_stack(t_item *stack)
 {
 	t_item *temp;
 
@@ -26,7 +26,7 @@ void free_stack(t_item *stack)
 	}
 }
 
-void push_swap(t_stack *s)
+static void push_swap(t_stack *s)
 {
 	if (s->total_size <= 1)
 		return;
@@ -39,7 +39,7 @@ void push_swap(t_stack *s)
 	else if (s->total_size == 5)
 		sort_5(s);
 	else
-		sort_large(s);
+		quick_sort(s);
 }
 
 int main(int argc, char **argv)
