@@ -3,26 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   quicksort_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:09:52 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/10 14:50:06 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/14 23:57:12 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-static void	sort_small(t_stack *s)
+static void	sort_small_a(t_stack *s, int size)
 {
-	if (s->size_a == 2)
-		sort_2(&s->a);
-	else if (s->size_a == 3)
-		sort_3(&s->a);
-	else if (s->size_a == 4)
-		sort_4(s);
-	else if (s->size_a == 5)
-		sort_5(s);
+    int top;
+    int mid;
+    int bot;
+
+    if (size <= 1 || is_sorted(s->a))
+        return ;
+    if (size == 2)
+    {
+        if (s->a->index > s->a->next->index)
+            sa(&s->a, 1);
+        return ;
+    }
+    top = s->a->index;
+    mid = s->a->next->index;
+    bot = s->a->next->next->index;
+    if (top < mid && mid > bot && top < bot)
+    {
+        rra(&s->a, 1);
+        sa(&s->a, 1);
+    }
+    else if (top > mid && mid < bot && top < bot)
+        sa(&s->a, 1);
+    else if (top < mid && mid > bot && top > bot)
+        rra(&s->a, 1);
+    else if (top > mid && mid < bot && top > bot)
+        ra(&s->a, 1);
+    else if (top > mid && mid > bot)
+    {
+        sa(&s->a, 1);
+        rra(&s->a, 1);
+    }
 }
+
+static void	sort_small_b(t_stack *s, int size)
+{
+    if (size == 0)
+        return ;
+    if (size == 1)
+    {
+        pa(&s->a, &s->b, 1);
+        s->size_a++;
+        s->size_b--;
+        return ;
+    }
+    if (size == 2)
+    {
+        if (s->b && s->b->next && s->b->index < s->b->next->index)
+            sb(&s->b, 1);
+        pa(&s->a, &s->b, 1);
+        pa(&s->a, &s->b, 1);
+        s->size_a += 2;
+        s->size_b -= 2;
+        return ;
+    }
+    /* size == 3: önce maksimumu A'ya al, kalan ikiliyi düzelt, sonra ikisini daha A'ya al */
+    if (s->b->index >= s->b->next->index && s->b->index >= s->b->next->next->index)
+    {
+        pa(&s->a, &s->b, 1);
+        s->size_a++;
+        s->size_b--;
+    }
+    else if (s->b->next->index >= s->b->index && s->b->next->index >= s->b->next->next->index)
+    {
+        sb(&s->b, 1);
+        pa(&s->a, &s->b, 1);
+        s->size_a++;
+        s->size_b--;
+    }
+    else
+    {
+        /* üçüncü eleman maksimum: rb; sb; pa; rrb ile derin elemanları bozmadan işle */
+        rb(&s->b, 1);
+        sb(&s->b, 1);
+        pa(&s->a, &s->b, 1);
+        s->size_a++;
+        s->size_b--;
+        rrb(&s->b, 1);
+    }
+    /* kalan 2 eleman B'de: büyük üste gelsin */
+    if (s->b && s->b->next && s->b->index < s->b->next->index)
+        sb(&s->b, 1);
+    pa(&s->a, &s->b, 1);
+    pa(&s->a, &s->b, 1);
+    s->size_a += 2;
+    s->size_b -= 2;
+}
+
+// static void	sort_small(t_stack *s)
+// {
+// 	if (s->size_a == 2)
+// 		sort_2(&s->a);
+// 	else if (s->size_a == 3)
+// 		sort_3(&s->a);
+// 	else if (s->size_a == 4)
+// 		sort_4(s);
+// 	else if (s->size_a == 5)
+// 		sort_5(s);
+// }
 
 /* quick_partition.c */
 
@@ -30,10 +119,11 @@ void	partition(t_stack *s, int pivot, int size)
 {
 	int	i;
 	int	threshold;
+    int	rotated;
 
-	/* threshold ile çok küçükleri B'nin altına gönder */
 	threshold = pivot - (size / 4); /* heuristic: pivot-12.5% */
-	i = 0;
+    i = 0;
+    rotated = 0;
 	while (i < size)
 	{
 		if (s->a->index <= pivot)
@@ -46,9 +136,14 @@ void	partition(t_stack *s, int pivot, int size)
 				rb(&s->b, 1);
 		}
 		else
-			ra(&s->a, 1);
+        {
+            ra(&s->a, 1);
+            rotated++;
+        }
 		i++;
 	}
+    while (rotated-- > 0)
+        rra(&s->a, 1);
 }
 
 
@@ -152,21 +247,136 @@ void	restore_by_max(t_stack *s)
 	}
 }
 
+static void	partition_a_to_b(t_stack *s, int pivot, int size, int *pushed_to_b)
+{
+    int i;
+    int rotated;
+    int threshold;
+
+    threshold = pivot - (size / 4);
+    i = 0;
+    rotated = 0;
+    *pushed_to_b = 0;
+    while (i < size)
+    {
+        if (s->a->index <= pivot)
+        {
+            pb(&s->a, &s->b, 1);
+            s->size_a--;
+            s->size_b++;
+            (*pushed_to_b)++;
+            if (s->b && s->b->index <= threshold)
+                rb(&s->b, 1);
+        }
+        else
+        {
+            ra(&s->a, 1);
+            rotated++;
+        }
+        i++;
+    }
+    while (rotated-- > 0)
+        rra(&s->a, 1);
+}
+
+static void	partition_b_to_a(t_stack *s, int pivot, int size, int *pushed_to_a)
+{
+    int i;
+    int rotated;
+
+    i = 0;
+    rotated = 0;
+    *pushed_to_a = 0;
+    while (i < size)
+    {
+        if (s->b->index > pivot)
+        {
+            pa(&s->a, &s->b, 1);
+            s->size_a++;
+            s->size_b--;
+            (*pushed_to_a)++;
+        }
+        else
+        {
+            rb(&s->b, 1);
+            rotated++;
+        }
+        i++;
+    }
+    while (rotated-- > 0)
+        rrb(&s->b, 1);
+}
+
+static void	quicksort_a(t_stack *s, int size)
+{
+    int pivot;
+    int pushed;
+
+    if (size <= 1 || is_sorted(s->a))
+        return ;
+    if (size <= 3)
+        return (sort_small_a(s, size));
+    pivot = get_pivot(s->a, size);
+    partition_a_to_b(s, pivot, size, &pushed);
+    quicksort_a(s, size - pushed);
+    quicksort_b(s, pushed);
+}
+
+static void	quicksort_b(t_stack *s, int size)
+{
+    int pivot;
+    int pushed;
+
+    if (size <= 0)
+        return ;
+    if (size <= 3)
+        return (sort_small_b(s, size));
+    pivot = get_pivot(s->b, size);
+    partition_b_to_a(s, pivot, size, &pushed);
+    quicksort_a(s, pushed);
+    quicksort_b(s, size - pushed);
+}
+
 void	quick_sort(t_stack *s)
 {
-	int	pivot;
-	int	size;
+    int target;
+    int chunk;
 
-	if (is_sorted(s->a))
-		return ;
-	if (s->size_a <= 5)
-	{
-		sort_small(s);
-		return ;
-	}
-	size = s->size_a;
-	pivot = get_pivot(s->a, size);
-	partition(s, pivot, size);
-	quick_sort(s);
-	restore_by_max(s);
+    if (is_sorted(s->a))
+        return ;
+    if (s->size_a <= 5)
+    {
+        if (s->size_a == 2)
+            sort_2(&s->a);
+        else if (s->size_a == 3)
+            sort_3(&s->a);
+        else if (s->size_a == 4)
+            sort_4(s);
+        else if (s->size_a == 5)
+            sort_5(s);
+        return ;
+    }
+    /* chunk tabanlı dağıtım */
+    chunk = (s->total_size <= 100) ? 15 : 30;
+    target = 0;
+    while (s->size_a > 0)
+    {
+        if (s->a->index <= target)
+        {
+            pb(&s->a, &s->b, 1);
+            s->size_a--; s->size_b++;
+            rb(&s->b, 1);
+            target++;
+        }
+        else if (s->a->index <= target + chunk)
+        {
+            pb(&s->a, &s->b, 1);
+            s->size_a--; s->size_b++;
+            target++;
+        }
+        else
+            ra(&s->a, 1);
+    }
+    /* B'den maksimumları geri al */
+    restore_by_max(s);
 }

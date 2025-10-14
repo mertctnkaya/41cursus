@@ -10,6 +10,8 @@ BOBJS	= $(BSRCS:.c=.o)
 
 all: $(NAME)
 
+.SUFFIXES:
+
 bonus: $(NAME) $(BNAME)
 
 $(NAME): $(OBJS)

@@ -88,7 +88,7 @@ void	sort_5(t_stack *s)
 	push_smallest_two(s);
 	sort_3(&s->a);
 	if (s->b->index < s->b->next->index)
-		sa(&s->b, 1);
+		sb(&s->b, 1);
 	pa(&s->a, &s->b, 1);
 	s->size_a++;
 	s->size_b--;

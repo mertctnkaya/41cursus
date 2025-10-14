@@ -1,0 +1,140 @@
+GNU Make 4.3
+Built for x86_64-pc-linux-gnu
+Copyright (C) 1988-2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Reading makefiles...
+Reading makefile 'Makefile'...
+Updating makefiles....
+ Considering target file 'Makefile'.
+  Looking for an implicit rule for 'Makefile'.
+  Trying pattern rule with stem 'Makefile'.
+  Trying implicit prerequisite 'Makefile,v'.
+  Trying pattern rule with stem 'Makefile'.
+  Trying implicit prerequisite 'RCS/Makefile,v'.
+  Trying pattern rule with stem 'Makefile'.
+  Trying implicit prerequisite 'RCS/Makefile'.
+  Trying pattern rule with stem 'Makefile'.
+  Trying implicit prerequisite 's.Makefile'.
+  Trying pattern rule with stem 'Makefile'.
+  Trying implicit prerequisite 'SCCS/s.Makefile'.
+  No implicit rule found for 'Makefile'.
+  Finished prerequisites of target file 'Makefile'.
+ No need to remake target 'Makefile'.
+Updating goal targets....
+Considering target file 'all'.
+ File 'all' does not exist.
+  Considering target file 'client'.
+   File 'client' does not exist.
+    Considering target file 'server.o'.
+     File 'server.o' does not exist.
+     Looking for an implicit rule for 'server.o'.
+     Trying pattern rule with stem 'server'.
+     Trying implicit prerequisite 'server.c'.
+     Found an implicit rule for 'server.o'.
+      Considering target file 'server.c'.
+       Looking for an implicit rule for 'server.c'.
+       Trying pattern rule with stem 'server'.
+       Trying implicit prerequisite 'server.w'.
+       Trying pattern rule with stem 'server.c'.
+       Trying implicit prerequisite 'server.c,v'.
+       Trying pattern rule with stem 'server.c'.
+       Trying implicit prerequisite 'RCS/server.c,v'.
+       Trying pattern rule with stem 'server.c'.
+       Trying implicit prerequisite 'RCS/server.c'.
+       Trying pattern rule with stem 'server.c'.
+       Trying implicit prerequisite 's.server.c'.
+       Trying pattern rule with stem 'server.c'.
+       Trying implicit prerequisite 'SCCS/s.server.c'.
+       Trying pattern rule with stem 'server'.
+       Trying implicit prerequisite 'server.w'.
+       Looking for a rule with intermediate file 'server.w'.
+        Avoiding implicit rule recursion.
+        Trying pattern rule with stem 'server.w'.
+        Trying implicit prerequisite 'server.w,v'.
+        Trying pattern rule with stem 'server.w'.
+        Trying implicit prerequisite 'RCS/server.w,v'.
+        Trying pattern rule with stem 'server.w'.
+        Trying implicit prerequisite 'RCS/server.w'.
+        Trying pattern rule with stem 'server.w'.
+        Trying implicit prerequisite 's.server.w'.
+        Trying pattern rule with stem 'server.w'.
+        Trying implicit prerequisite 'SCCS/s.server.w'.
+       No implicit rule found for 'server.c'.
+       Finished prerequisites of target file 'server.c'.
+      No need to remake target 'server.c'.
+     Finished prerequisites of target file 'server.o'.
+    Must remake target 'server.o'.
+cc -Wall -Wextra -Werror -c server.c -o server.o
+Putting child 0x64271b5062e0 (server.o) PID 149029 on the chain.
+Live child 0x64271b5062e0 (server.o) PID 149029 
+Reaping winning child 0x64271b5062e0 PID 149029 
+Removing child 0x64271b5062e0 PID 149029 from chain.
+    Successfully remade target file 'server.o'.
+    Considering target file 'client.o'.
+     File 'client.o' does not exist.
+     Looking for an implicit rule for 'client.o'.
+     Trying pattern rule with stem 'client'.
+     Trying implicit prerequisite 'client.c'.
+     Found an implicit rule for 'client.o'.
+      Considering target file 'client.c'.
+       Looking for an implicit rule for 'client.c'.
+       Trying pattern rule with stem 'client'.
+       Trying implicit prerequisite 'client.w'.
+       Trying pattern rule with stem 'client.c'.
+       Trying implicit prerequisite 'client.c,v'.
+       Trying pattern rule with stem 'client.c'.
+       Trying implicit prerequisite 'RCS/client.c,v'.
+       Trying pattern rule with stem 'client.c'.
+       Trying implicit prerequisite 'RCS/client.c'.
+       Trying pattern rule with stem 'client.c'.
+       Trying implicit prerequisite 's.client.c'.
+       Trying pattern rule with stem 'client.c'.
+       Trying implicit prerequisite 'SCCS/s.client.c'.
+       Trying pattern rule with stem 'client'.
+       Trying implicit prerequisite 'client.w'.
+       Looking for a rule with intermediate file 'client.w'.
+        Avoiding implicit rule recursion.
+        Trying pattern rule with stem 'client.w'.
+        Trying implicit prerequisite 'client.w,v'.
+        Trying pattern rule with stem 'client.w'.
+        Trying implicit prerequisite 'RCS/client.w,v'.
+        Trying pattern rule with stem 'client.w'.
+        Trying implicit prerequisite 'RCS/client.w'.
+        Trying pattern rule with stem 'client.w'.
+        Trying implicit prerequisite 's.client.w'.
+        Trying pattern rule with stem 'client.w'.
+        Trying implicit prerequisite 'SCCS/s.client.w'.
+       No implicit rule found for 'client.c'.
+       Finished prerequisites of target file 'client.c'.
+      No need to remake target 'client.c'.
+     Finished prerequisites of target file 'client.o'.
+    Must remake target 'client.o'.
+cc -Wall -Wextra -Werror -c client.c -o client.o
+Putting child 0x64271b509fe0 (client.o) PID 149032 on the chain.
+Live child 0x64271b509fe0 (client.o) PID 149032 
+Reaping winning child 0x64271b509fe0 PID 149032 
+Removing child 0x64271b509fe0 PID 149032 from chain.
+    Successfully remade target file 'client.o'.
+   Finished prerequisites of target file 'client'.
+  Must remake target 'client'.
+cc -Wall -Wextra -Werror server.o -o server
+Putting child 0x64271b509630 (client) PID 149035 on the chain.
+Live child 0x64271b509630 (client) PID 149035 
+Reaping winning child 0x64271b509630 PID 149035 
+cc -Wall -Wextra -Werror client.o -o client
+Live child 0x64271b509630 (client) PID 149038 
+Reaping winning child 0x64271b509630 PID 149038 
+Removing child 0x64271b509630 PID 149038 from chain.
+  Successfully remade target file 'client'.
+  Considering target file 'server'.
+    Pruning file 'server.o'.
+    Pruning file 'client.o'.
+   Finished prerequisites of target file 'server'.
+   Prerequisite 'server.o' is older than target 'server'.
+   Prerequisite 'client.o' is older than target 'server'.
+  No need to remake target 'server'.
+ Finished prerequisites of target file 'all'.
+Must remake target 'all'.
+Successfully remade target file 'all'.
