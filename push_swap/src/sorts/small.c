@@ -29,18 +29,18 @@ void	sort_3(t_item **a)
 	top = (*a)->index;
 	mid = (*a)->next->index;
 	bot = (*a)->next->next->index;
-	if (top < mid && mid > bot && top < bot) // [0,2,1]
+	if (top < mid && mid > bot && top < bot)
 	{
 		rra(a, 1);
 		sa(a, 1);
 	}
-	else if (top > mid && mid < bot && top < bot) // [1,0,2]
+	else if (top > mid && mid < bot && top < bot)
 		sa(a, 1);
-	else if (top < mid && mid > bot && top > bot) // [1,2,0]
+	else if (top < mid && mid > bot && top > bot)
 		rra(a, 1);
-	else if (top > mid && mid < bot && top > bot) // [2,0,1]
+	else if (top > mid && mid < bot && top > bot)
 		ra(a, 1);
-	else if (top > mid && mid > bot) // [2,1,0]
+	else if (top > mid && mid > bot)
 	{
 		sa(a, 1);
 		rra(a, 1);

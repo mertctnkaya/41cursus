@@ -12,7 +12,7 @@
 
 #include "../../push_swap.h"
 
-static void	bring_to_top(t_item **a, int index, int size_a)
+void	bring_to_top(t_item **a, int index, int size_a)
 {
 	int		pos;
 	t_item	*temp;
@@ -33,7 +33,8 @@ static void	bring_to_top(t_item **a, int index, int size_a)
 	}
 	else
 	{
-		while (pos++ < size_a)
+		pos = size_a - pos;
+		while (pos-- > 0)
 			rra(a, 1);
 	}
 }

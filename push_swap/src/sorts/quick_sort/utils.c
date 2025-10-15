@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../push_swap.h"
+#include "../../../push_swap.h"
 
 static void	fill_array(t_item *a, int *arr, int size)
 {

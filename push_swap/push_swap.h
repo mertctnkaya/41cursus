@@ -34,9 +34,23 @@ typedef struct s_stack
 }	t_stack;
 
 void	quick_sort(t_stack *s);
+void	quick_sort_chunk(t_stack *s);
+void	quick_sort_small(t_stack *s);
 int		get_pivot(t_item *a, int size);
 void	partition(t_stack *s, int pivot, int size);
+void	partition_a_to_b(t_stack *s, int pivot, int size, int *pushed_to_b);
+void	partition_b_to_a(t_stack *s, int pivot, int size, int *pushed_to_a);
+void	quicksort_a(t_stack *s, int size);
+void	quicksort_b(t_stack *s, int size);
+void	sort_small_a(t_stack *s, int size);
+void	sort_small_b(t_stack *s, int size);
+void	sort_small_b_three(t_stack *s);
+void	rotate_b_to_top(t_stack *s, int pos);
+void	restore_sorted_from_b(t_stack *s);
+void	restore_by_max(t_stack *s);
+void	restore_final_sort(t_stack *s);
 int		find_min_pos(t_item *stack);
+int		find_max_pos(t_item *stack);
 
 t_item	*parse_and_create_stack(int argc, char **argv, int *size);
 void	assign_index(t_item **stack, int size);
@@ -67,5 +81,6 @@ void	sort_3(t_item **a);
 
 void	sort_4(t_stack *s);
 void	sort_5(t_stack *s);
+void	bring_to_top(t_item **a, int index, int size_a);
 
 #endif

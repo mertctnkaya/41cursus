@@ -77,8 +77,8 @@ int	do_operations(t_stack *s, int op)
 	if (op & 8)
 	{
 		sa(&s->a, 1);
-		ra(&s->a, 1);
-		ra(&s->a, 1);
+		rra(&s->a, 1);
+		sa(&s->a, 1);
 	}
 	return (1);
 }

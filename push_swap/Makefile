@@ -20,8 +20,13 @@ SRC_FILES	= \
 	\
 	src/sorts/small.c			\
 	src/sorts/medium.c			\
-	src/sorts/quicksort_main.c	\
-	src/sorts/quicksort_utils.c
+	\
+	src/sorts/quick_sort/main.c	\
+	src/sorts/quick_sort/utils.c	\
+	src/sorts/quick_sort/small_chunks.c	\
+	src/sorts/quick_sort/partition.c	\
+	src/sorts/quick_sort/restore.c	\
+	src/sorts/quick_sort/recursive.c
 
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRC_FILES:src/%.c=$(OBJ_DIR)/%.o)
