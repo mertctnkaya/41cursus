@@ -3,46 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   small.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 20:52:49 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/10 12:26:57 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/17 01:52:06 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void	sort_2(t_item **a)
+// Küçük boyutlu sıralama işlemleri için fonksiyonlar içerir.
+
+void sort_2(t_item **a)
 {
+	// 2 elemanlı bir stack'i sıralar.
 	if (!is_sorted(*a))
-		sa(a, 1);
+		sa(a, 1); // Eğer sıralı değilse, swap işlemi yapar.
 }
 
-void	sort_3(t_item **a)
+void sort_3(t_item **a)
 {
-	int	top;
-	int	mid;
-	int	bot;
+	// 3 elemanlı bir stack'i sıralar.
+	int top;
+	int mid;
+	int bot;
 
 	if (is_sorted(*a))
-		return ;
-	top = (*a)->index;
-	mid = (*a)->next->index;
-	bot = (*a)->next->next->index;
+		return;					   // Eğer sıralıysa, işlem yapmadan çıkar.
+	top = (*a)->index;			   // İlk elemanın index'i.
+	mid = (*a)->next->index;	   // İkinci elemanın index'i.
+	bot = (*a)->next->next->index; // Üçüncü elemanın index'i.
 	if (top < mid && mid > bot && top < bot)
 	{
-		rra(a, 1);
-		sa(a, 1);
+		rra(a, 1); // Reverse rotate işlemi.
+		sa(a, 1);  // Swap işlemi.
 	}
 	else if (top > mid && mid < bot && top < bot)
-		sa(a, 1);
+		sa(a, 1); // Sadece swap işlemi.
 	else if (top < mid && mid > bot && top > bot)
-		rra(a, 1);
+		rra(a, 1); // Sadece reverse rotate işlemi.
 	else if (top > mid && mid < bot && top > bot)
-		ra(a, 1);
+		ra(a, 1); // Rotate işlemi.
 	else if (top > mid && mid > bot)
 	{
-		sa(a, 1);
-		rra(a, 1);
+		sa(a, 1);  // Swap işlemi.
+		rra(a, 1); // Reverse rotate işlemi.
 	}
 }

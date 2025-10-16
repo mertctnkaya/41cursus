@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:31:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/10 12:52:30 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/17 01:21:35 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ typedef struct s_stack
 }	t_stack;
 
 void	quick_sort(t_stack *s);
-void	quick_sort_chunk(t_stack *s);
-void	quick_sort_small(t_stack *s);
+// void	quick_sort_small(t_stack *s);
 int		get_pivot(t_item *a, int size);
 void	partition(t_stack *s, int pivot, int size);
 void	partition_a_to_b(t_stack *s, int pivot, int size, int *pushed_to_b);
@@ -65,16 +64,14 @@ void	sa(t_item **a, int cout);
 void	sb(t_item **b, int cout);
 void	ss(t_item **a, t_item **b, int cout);
 
-void	pa(t_item **a, t_item **b, int cout);
-void	pb(t_item **a, t_item **b, int cout);
+void	pa(t_stack *s, int cout);
+void	pb(t_stack *s, int cout);
 
 void	ra(t_item **a, int cout);
 void	rb(t_item **b, int cout);
-void	rr(t_item **a, t_item **b, int cout);
 
 void	rra(t_item **a, int cout);
 void	rrb(t_item **b, int cout);
-void	rrr(t_item **a, t_item **b, int cout);
 
 void	sort_2(t_item **a);
 void	sort_3(t_item **a);

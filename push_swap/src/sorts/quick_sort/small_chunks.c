@@ -12,93 +12,65 @@
 
 #include "../../../push_swap.h"
 
-void	sort_small_a(t_stack *s, int size)
-{
-	int	top;
-	int	mid;
-	int	bot;
+// Küçük boyutlu stack'ler için sıralama işlemleri içerir.
 
+void sort_small_a(t_stack *s, int size)
+{
+	// Stack A'daki küçük boyutlu elemanları sıralar.
 	if (size <= 1 || is_sorted(s->a))
-		return ;
+		return; // Eğer sıralanacak eleman yoksa veya zaten sıralıysa, işlem yapmadan çıkar.
 	if (size == 2)
 	{
-		if (s->a->index > s->a->next->index)
-			sa(&s->a, 1);
-		return ;
+		sort_2(&s->a); // 2 eleman için özel sıralama.
+		return;
 	}
-	top = s->a->index;
-	mid = s->a->next->index;
-	bot = s->a->next->next->index;
-	if (top < mid && mid > bot && top < bot)
+	if (size == 3)
 	{
-		rra(&s->a, 1);
-		sa(&s->a, 1);
-	}
-	else if (top > mid && mid < bot && top < bot)
-		sa(&s->a, 1);
-	else if (top < mid && mid > bot && top > bot)
-		rra(&s->a, 1);
-	else if (top > mid && mid < bot && top > bot)
-		ra(&s->a, 1);
-	else if (top > mid && mid > bot)
-	{
-		sa(&s->a, 1);
-		rra(&s->a, 1);
+		sort_3(&s->a); // 3 eleman için özel sıralama.
+		return;
 	}
 }
 
-void	sort_small_b(t_stack *s, int size)
+void sort_small_b(t_stack *s, int size)
 {
+	// Stack B'deki küçük boyutlu elemanları sıralar.
 	if (size == 0)
-		return ;
+		return; // Eğer sıralanacak eleman yoksa, işlem yapmadan çıkar.
 	if (size == 1)
 	{
-		pa(&s->a, &s->b, 1);
-		s->size_a++;
-		s->size_b--;
-		return ;
+		pa(s, 1); // Stack B'den Stack A'ya taşır.
+		return;
 	}
 	if (size == 2)
 	{
 		if (s->b && s->b->next && s->b->index < s->b->next->index)
-			sb(&s->b, 1);
-		pa(&s->a, &s->b, 1);
-		pa(&s->a, &s->b, 1);
-		s->size_a += 2;
-		s->size_b -= 2;
-		return ;
+			sb(&s->b, 1); // Eğer sıralı değilse, swap işlemi yapar.
+		pa(s, 1);		  // Stack B'den Stack A'ya taşır.
+		pa(s, 1);		  // Stack B'den Stack A'ya taşır.
+		return;
 	}
-	sort_small_b_three(s);
+	sort_small_b_three(s); // 3 eleman için özel sıralama.
 }
 
-void	sort_small_b_three(t_stack *s)
+void sort_small_b_three(t_stack *s)
 {
+	// Stack B'deki 3 elemanı sıralar.
 	if (s->b->index >= s->b->next->index && s->b->index >= s->b->next->next->index)
-	{
-		pa(&s->a, &s->b, 1);
-		s->size_a++;
-		s->size_b--;
-	}
+		pa(s, 1); // En büyük elemanı Stack A'ya taşır.
 	else if (s->b->next->index >= s->b->index && s->b->next->index >= s->b->next->next->index)
 	{
-		sb(&s->b, 1);
-		pa(&s->a, &s->b, 1);
-		s->size_a++;
-		s->size_b--;
+		sb(&s->b, 1); // İlk iki elemanı değiştirir.
+		pa(s, 1);	  // En büyük elemanı Stack A'ya taşır.
 	}
 	else
 	{
-		rb(&s->b, 1);
-		sb(&s->b, 1);
-		pa(&s->a, &s->b, 1);
-		s->size_a++;
-		s->size_b--;
-		rrb(&s->b, 1);
+		rb(&s->b, 1);  // Stack B'yi döndürür.
+		sb(&s->b, 1);  // İlk iki elemanı değiştirir.
+		pa(s, 1);	   // En büyük elemanı Stack A'ya taşır.
+		rrb(&s->b, 1); // Stack B'yi ters döndürür.
 	}
 	if (s->b && s->b->next && s->b->index < s->b->next->index)
-		sb(&s->b, 1);
-	pa(&s->a, &s->b, 1);
-	pa(&s->a, &s->b, 1);
-	s->size_a += 2;
-	s->size_b -= 2;
+		sb(&s->b, 1); // Eğer sıralı değilse, swap işlemi yapar.
+	pa(s, 1);
+	pa(s, 1);
 }

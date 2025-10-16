@@ -3,61 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/10 12:35:43 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/17 01:52:06 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_item	*new_item(int num)
-{
-	t_item	*new;
+// Kullanıcıdan alınan verilerin doğruluğunu kontrol eder ve stack'e ekler.
 
-	new = (t_item *)malloc(sizeof(t_item));
+t_item *new_item(int num)
+{
+	// Yeni bir stack elemanı oluşturur.
+	t_item *new;
+
+	new = (t_item *)malloc(sizeof(t_item)); // Bellekten yeni bir eleman için yer ayırır.
 	if (!new)
-		raise_error();
-	new->prev = 0;
-	new->next = 0;
-	new->index = -1;
-	new->value = num;
-	return (new);
+		raise_error(); // Bellek tahsisi başarısız olursa, hata verir.
+	new->prev = 0;	   // Önceki eleman yok (ilk eleman için).
+	new->next = 0;	   // Sonraki eleman yok (şimdilik).
+	new->index = -1;   // Varsayılan index değeri.
+	new->value = num;  // Elemanın değerini atar.
+	return (new);	   // Yeni elemanın adresini döner.
 }
 
-static void	check_duplicates(t_item *stack, int value)
+static void check_duplicates(t_item *stack, int value)
 {
-	t_item	*current;
+	// Stack'te tekrar eden değer olup olmadığını kontrol eder.
+	t_item *current;
 
 	current = stack;
 	while (current)
 	{
 		if (current->value == value)
-			raise_error();
-		current = current->next;
+			raise_error();		 // Eğer değer tekrar ediyorsa, hata verir.
+		current = current->next; // Bir sonraki elemana geçer.
 	}
 }
 
-static void	append_item(t_item **a, t_item **current, t_item *item)
+static void append_item(t_item **a, t_item **current, t_item *item)
 {
+	// Yeni bir elemanı stack'e ekler.
 	if (!*a)
-		*a = item;
+		*a = item; // Eğer stack boşsa, yeni eleman ilk eleman olur.
 	else
 	{
-		(*current)->next = item;
-		item->prev = *current;
+		(*current)->next = item; // Mevcut elemanın sonrasına ekler.
+		item->prev = *current;	 // Yeni elemanın önceki elemanını ayarlar.
 	}
 	*current = item;
 }
 
-t_item	*parse_and_create_stack(int argc, char **argv, int *size)
+t_item *parse_and_create_stack(int argc, char **argv, int *size)
 {
-	t_item	*a;
-	t_item	*current;
-	t_item	*new;
-	long	num;
-	int		i;
+	t_item *a;
+	t_item *current;
+	t_item *new;
+	long num;
+	int i;
 
 	if (argc < 2)
 		exit(0);
@@ -79,11 +84,11 @@ t_item	*parse_and_create_stack(int argc, char **argv, int *size)
 	return (a);
 }
 
-void	assign_index(t_item **stack, int size)
+void assign_index(t_item **stack, int size)
 {
-	t_item	*current;
-	t_item	*lowest;
-	int		index;
+	t_item *current;
+	t_item *lowest;
+	int index;
 
 	index = 0;
 	while (index < size)
@@ -92,8 +97,7 @@ void	assign_index(t_item **stack, int size)
 		current = *stack;
 		while (current)
 		{
-			if (current->index == -1
-				&& (!lowest || current->value < lowest->value))
+			if (current->index == -1 && (!lowest || current->value < lowest->value))
 				lowest = current;
 			current = current->next;
 		}

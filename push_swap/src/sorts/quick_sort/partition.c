@@ -1,40 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quicksort_partition.c                              :+:      :+:    :+:   */
+/*   partition.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 23:57:12 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/14 23:57:12 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/17 01:58:39 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../push_swap.h"
 
-void	partition(t_stack *s, int pivot, int size)
-{
-	int	i;
-	int	threshold;
-	int	rotated;
+// Quick sort algoritmasında elemanları bölmek için kullanılan fonksiyonlar içerir.
 
-	threshold = pivot - (size / 4);
+static void a_to_b_step(t_stack *s, int pivot, int threshold, int *rotated, int *pushed)
+{
+	// Stack A'dan Stack B'ye eleman taşır veya döndürür.
+	if (s->a->index <= pivot)
+	{
+		pb(s, 1);	 // Stack A'dan Stack B'ye taşır.
+		(*pushed)++; // Taşınan eleman sayısını artırır.
+		if (s->b && s->b->index <= threshold)
+			rb(&s->b, 1); // Eğer eleman threshold'un altındaysa, Stack B'yi döndürür.
+	}
+	else
+	{
+		ra(&s->a, 1); // Eğer eleman pivot'un üzerindeyse, Stack A'yı döndürür.
+		(*rotated)++; // Döndürülen eleman sayısını artırır.
+	}
+}
+
+void partition(t_stack *s, int pivot, int size)
+{
+	// Stack A'daki elemanları pivot'a göre böler.
+	int i;
+	int threshold;
+	int rotated;
+
+	threshold = pivot - (size / 4); // Threshold, pivot'un altındaki bir aralıktır.
+
 	i = 0;
 	rotated = 0;
 	while (i < size)
 	{
 		if (s->a->index <= pivot)
 		{
-			pb(&s->a, &s->b, 1);
-			s->size_a--;
-			s->size_b++;
+			pb(s, 1); // Stack A'dan Stack B'ye taşır.
 			if (s->b && s->b->index <= threshold)
-				rb(&s->b, 1);
+				rb(&s->b, 1); // Eğer eleman threshold'un altındaysa, Stack B'yi döndürür.
 		}
 		else
 		{
-			ra(&s->a, 1);
-			rotated++;
+			ra(&s->a, 1); // Eğer eleman pivot'un üzerindeyse, Stack A'yı döndürür.
 		}
 		i++;
 	}
@@ -42,62 +60,45 @@ void	partition(t_stack *s, int pivot, int size)
 		rra(&s->a, 1);
 }
 
-void	partition_a_to_b(t_stack *s, int pivot, int size, int *pushed_to_b)
+void partition_a_to_b(t_stack *s, int pivot, int size, int *pushed_to_b)
 {
-	int	i;
-	int	rotated;
-	int	threshold;
+	// Stack A'daki elemanları pivot'a göre Stack B'ye böler.
+	int i;
+	int rotated;
+	int threshold;
 
-	threshold = pivot - (size / 4);
-	i = 0;
+	threshold = pivot - (size / 4); // Threshold, pivot'un altındaki bir aralıktır.
+	i = -1;
 	rotated = 0;
 	*pushed_to_b = 0;
-	while (i < size)
-	{
-		if (s->a->index <= pivot)
-		{
-			pb(&s->a, &s->b, 1);
-			s->size_a--;
-			s->size_b++;
-			(*pushed_to_b)++;
-			if (s->b && s->b->index <= threshold)
-				rb(&s->b, 1);
-		}
-		else
-		{
-			ra(&s->a, 1);
-			rotated++;
-		}
-		i++;
-	}
+	while (++i < size)
+		a_to_b_step(s, pivot, threshold, &rotated, pushed_to_b);
 	while (rotated-- > 0)
-		rra(&s->a, 1);
+		rra(&s->a, 1); // Döndürülen elemanları eski konumlarına getirir.
 }
 
-void	partition_b_to_a(t_stack *s, int pivot, int size, int *pushed_to_a)
+void partition_b_to_a(t_stack *s, int pivot, int size, int *pushed_to_a)
 {
-	int	i;
-	int	rotated;
+	// Stack B'deki elemanları pivot'a göre Stack A'ya böler.
+	int i;
+	int rotated;
 
-	i = 0;
+	i = -1;
 	rotated = 0;
 	*pushed_to_a = 0;
-	while (i < size)
+	while (++i < size)
 	{
 		if (s->b->index > pivot)
 		{
-			pa(&s->a, &s->b, 1);
-			s->size_a++;
-			s->size_b--;
-			(*pushed_to_a)++;
+			pa(s, 1);		  // Stack B'den Stack A'ya taşır.
+			(*pushed_to_a)++; // Taşınan eleman sayısını artırır.
 		}
 		else
 		{
-			rb(&s->b, 1);
+			rb(&s->b, 1); // Stack B'yi döndürür.
 			rotated++;
 		}
-		i++;
 	}
 	while (rotated-- > 0)
-		rrb(&s->b, 1);
+		rrb(&s->b, 1); // Döndürülen elemanları eski konumlarına getirir.
 }
