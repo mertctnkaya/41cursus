@@ -23,10 +23,10 @@ SRC_FILES	= \
 	\
 	src/sorts/quick_sort/qs_main.c	\
 	src/sorts/quick_sort/qs_utils.c	\
-	src/sorts/quick_sort/small_chunks.c	\
-	src/sorts/quick_sort/partition.c	\
-	src/sorts/quick_sort/restore.c	\
-	src/sorts/quick_sort/recursive.c
+	src/sorts/quick_sort/restore.c
+# 	src/sorts/quick_sort/small_chunks.c	\
+# 	src/sorts/quick_sort/partition.c	\
+# 	src/sorts/quick_sort/recursive.c
 
 CHC_FILES	= \
 	src/checker/checker.c \
