@@ -6,40 +6,11 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:06:54 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/19 12:27:24 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/19 20:09:11 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../push_swap.h"
-
-int get_pivot(t_item *a, int size)
-{
-	t_item *cur;
-	t_item *min;
-	int i;
-	int j;
-	int pivot;
-
-	i = 0;
-	while (i < size / 2 + 1)
-	{
-		cur = a;
-		min = NULL;
-		j = 0;
-		while (j < size)
-		{
-			if ((!min || cur->index < min->index) && cur->index != -1)
-				min = cur;
-			cur = cur->next;
-			j++;
-		}
-		if (i == size / 2)
-			pivot = min->index;
-		min->index = -1;
-		i++;
-	}
-	return (pivot);
-}
+#include "../../push_swap.h"
 
 int find_min_pos(t_item *stack)
 {

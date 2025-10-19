@@ -6,11 +6,11 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:09:52 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/19 19:08:31 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/19 20:09:20 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../push_swap.h"
+#include "../../push_swap.h"
 
 static void push_by_chunk(t_stack *s, int *target, int chunk)
 {

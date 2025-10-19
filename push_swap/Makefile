@@ -21,9 +21,9 @@ SRC_FILES	= \
 	src/sorts/small.c			\
 	src/sorts/medium.c			\
 	\
-	src/sorts/quick_sort/qs_main.c	\
-	src/sorts/quick_sort/qs_utils.c	\
-	src/sorts/quick_sort/restore.c
+	src/sorts/qs_main.c	\
+	src/sorts/qs_utils.c	\
+	src/sorts/restore.c
 # 	src/sorts/quick_sort/small_chunks.c	\
 # 	src/sorts/quick_sort/partition.c	\
 # 	src/sorts/quick_sort/recursive.c
