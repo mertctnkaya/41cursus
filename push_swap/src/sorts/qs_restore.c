@@ -6,28 +6,11 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 23:57:12 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/19 20:09:15 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/19 20:11:32 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
-
-void rotate_b_to_top(t_stack *s, int pos)
-{
-	int moves;
-
-	if (pos <= s->size_b / 2)
-	{
-		while (pos-- > 0)
-			rb(&s->b, 1);
-	}
-	else
-	{
-		moves = s->size_b - pos;
-		while (moves-- > 0)
-			rrb(&s->b, 1);
-	}
-}
 
 void restore_sorted_from_b(t_stack *s)
 {

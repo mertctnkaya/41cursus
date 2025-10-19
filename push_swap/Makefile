@@ -21,24 +21,21 @@ SRC_FILES	= \
 	src/sorts/small.c			\
 	src/sorts/medium.c			\
 	\
-	src/sorts/qs_main.c	\
-	src/sorts/qs_utils.c	\
-	src/sorts/restore.c
-# 	src/sorts/quick_sort/small_chunks.c	\
-# 	src/sorts/quick_sort/partition.c	\
-# 	src/sorts/quick_sort/recursive.c
+	src/sorts/qs_main.c			\
+	src/sorts/qs_utils.c		\
+	src/sorts/qs_restore.c
 
 CHC_FILES	= \
-	src/checker/checker.c \
-	src/checker/extra_ops.c \
+	src/checker/checker.c		\
+	src/checker/extra_ops.c		\
 	src/checker/checker_utils.c \
 	\
-	src/operations/push.c \
-	src/operations/rotate.c \
-	src/operations/rrotate.c \
-	src/operations/swap.c \
+	src/operations/push.c		\
+	src/operations/rotate.c		\
+	src/operations/rrotate.c	\
+	src/operations/swap.c		\
 	\
-	src/utils.c \
+	src/utils.c					\
 	src/validation.c
 
 OBJ_DIR		= objs
@@ -48,8 +45,6 @@ CHC_OBJS	= $(CHC_FILES:src/%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 bonus: $(BONUS_NAME)
-
-# $(filter-out $(OBJ_DIR)/main.o, $(SRC_OBJS))
 
 $(BONUS_NAME): $(CHC_OBJS)
 	$(CC) $(CFLAGS) $(CHC_OBJS) -o $(BONUS_NAME)
