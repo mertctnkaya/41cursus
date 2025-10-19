@@ -6,63 +6,58 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 23:11:18 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 02:00:36 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:48:47 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// Yardımcı fonksiyonlar içerir. Hata yönetimi, sıralama kontrolü gibi işlemleri yapar.
-
 void raise_error(void)
 {
-	// Hata durumunda "Error" mesajı yazdırır ve programı sonlandırır.
-	write(1, "Error\n", 6); // "Error" mesajını standart çıktıya yazdırır.
-	exit(1);				// Programı sonlandırır.
+	write(1, "Error\n", 6);
+	exit(1);
 }
 
 int is_sorted(t_item *stack)
 {
-	// Stack'in sıralı olup olmadığını kontrol eder.
 	if (!stack)
-		return (1); // Eğer stack boşsa, sıralı kabul edilir.
+		return (1);
 	while (stack->next)
 	{
 		if (stack->index > stack->next->index)
-			return (0);		 // Eğer bir eleman bir sonrakinden büyükse, sıralı değildir.
-		stack = stack->next; // Stack'i bir sonraki elemana ilerletir.
+			return (0);
+		stack = stack->next;
 	}
-	return (1); // Tüm elemanlar sıralıysa, 1 döner.
+	return (1);
 }
 
 long atol_check(const char *str)
 {
-	// Bir string'i long tipe çevirir ve geçersiz girişleri kontrol eder.
 	long res;
 	int sign;
 
 	res = 0;
 	sign = 1;
 	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++; // Boşluk karakterlerini atlar.
+		str++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			sign = -1; // Negatif işaretini belirler.
+			sign = -1;
 		str++;
 	}
 	if (!(*str >= 48 && *str <= 57))
-		raise_error(); // Eğer sayı değilse, hata verir.
+		raise_error();
 	while ((*str >= 48 && *str <= 57))
 	{
-		res = res * 10 + (*str - '0'); // String'den sayıya çevirir.
+		res = res * 10 + (*str - '0');
 		if ((sign == 1 && res > 2147483647) || (sign == -1 && res > 2147483648))
-			raise_error(); // Eğer sayı int sınırlarını aşarsa, hata verir.
+			raise_error();
 		str++;
 	}
 	if (*str != '\0')
-		raise_error();	 // Eğer string'in sonunda başka karakter varsa, hata verir.
-	return (res * sign); // Sonuç döner.
+		raise_error();
+	return (res * sign);
 }
 
 int match_case(t_item *a, int *n)
@@ -84,7 +79,7 @@ int do_operations(t_stack *s, int op)
 	{
 		sa(&s->a, 1);
 		rra(&s->a, 1);
-		sa(&s->a, 1); // Özel bir sıralama kombinasyonu.
+		sa(&s->a, 1);
 	}
 	return (1);
 }

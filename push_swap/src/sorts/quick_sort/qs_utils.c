@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   qs_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:06:54 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 02:01:15 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/19 12:27:24 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,46 +20,76 @@ int get_pivot(t_item *a, int size)
 	int j;
 	int pivot;
 
-	for (i = 0; i < size / 2 + 1; i++)
+	i = 0;
+	while (i < size / 2 + 1)
 	{
 		cur = a;
 		min = NULL;
-		for (j = 0; j < size; j++)
+		j = 0;
+		while (j < size)
 		{
 			if ((!min || cur->index < min->index) && cur->index != -1)
 				min = cur;
 			cur = cur->next;
+			j++;
 		}
 		if (i == size / 2)
 			pivot = min->index;
 		min->index = -1;
+		i++;
 	}
 	return (pivot);
 }
 
 int find_min_pos(t_item *stack)
 {
-	// Stack'teki minimum elemanın pozisyonunu bulur.
-	int min;
-	int pos;
-	int min_pos;
-	t_item *cur;
+	int		min;
+	int		pos;
+	int		min_pos;
+	t_item	*cur;
 
 	if (!stack)
-		return (0); // Eğer stack boşsa, 0 döner.
+		return (0);
 	cur = stack;
-	min = cur->index; // İlk elemanı minimum olarak varsayar.
+	min = cur->index;
 	min_pos = 0;
 	pos = 0;
 	while (cur)
 	{
 		if (cur->index < min)
 		{
-			min = cur->index; // Daha küçük bir eleman bulursa, minimumu günceller.
-			min_pos = pos;	  // Minimum elemanın pozisyonunu günceller.
+			min = cur->index;
+			min_pos = pos;
 		}
-		cur = cur->next; // Bir sonraki elemana geçer.
+		cur = cur->next;
 		pos++;
 	}
-	return (min_pos); // Minimum elemanın pozisyonunu döner.
+	return (min_pos);
+}
+
+
+int find_max_pos(t_item *stack)
+{
+	int pos;
+	int max_pos;
+	int max;
+	t_item *cur;
+
+	if (!stack)
+		return (0);
+	cur = stack;
+	max = cur->index; // ilk elemanı max olarak varsayar
+	max_pos = 0;
+	pos = 0;
+	while (cur)
+	{
+		if (cur->index > max)
+		{
+			max = cur->index;
+			max_pos = pos;
+		}
+		cur = cur->next;
+		pos++;
+	}
+	return (max_pos);
 }

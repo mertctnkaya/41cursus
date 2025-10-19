@@ -6,27 +6,24 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 01:52:06 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:38:55 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// Kullanıcıdan alınan verilerin doğruluğunu kontrol eder ve stack'e ekler.
-
 t_item *new_item(int num)
 {
-	// Yeni bir stack elemanı oluşturur.
 	t_item *new;
 
-	new = (t_item *)malloc(sizeof(t_item)); // Bellekten yeni bir eleman için yer ayırır.
+	new = (t_item *)malloc(sizeof(t_item));
 	if (!new)
-		raise_error(); // Bellek tahsisi başarısız olursa, hata verir.
-	new->prev = 0;	   // Önceki eleman yok (ilk eleman için).
-	new->next = 0;	   // Sonraki eleman yok (şimdilik).
-	new->index = -1;   // Varsayılan index değeri.
-	new->value = num;  // Elemanın değerini atar.
-	return (new);	   // Yeni elemanın adresini döner.
+		raise_error();
+	new->prev = 0;
+	new->next = 0;
+	new->index = -1;
+	new->value = num;
+	return (new);
 }
 
 static void check_duplicates(t_item *stack, int value)
@@ -45,13 +42,12 @@ static void check_duplicates(t_item *stack, int value)
 
 static void append_item(t_item **a, t_item **current, t_item *item)
 {
-	// Yeni bir elemanı stack'e ekler.
 	if (!*a)
-		*a = item; // Eğer stack boşsa, yeni eleman ilk eleman olur.
+		*a = item;
 	else
 	{
-		(*current)->next = item; // Mevcut elemanın sonrasına ekler.
-		item->prev = *current;	 // Yeni elemanın önceki elemanını ayarlar.
+		(*current)->next = item;
+		item->prev = *current;
 	}
 	*current = item;
 }

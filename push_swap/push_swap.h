@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:31:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 01:21:35 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:32:30 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,25 @@ typedef struct s_stack
 }	t_stack;
 
 void	quick_sort(t_stack *s);
-// void	quick_sort_small(t_stack *s);
-int		get_pivot(t_item *a, int size);
+
 void	partition(t_stack *s, int pivot, int size);
 void	partition_a_to_b(t_stack *s, int pivot, int size, int *pushed_to_b);
 void	partition_b_to_a(t_stack *s, int pivot, int size, int *pushed_to_a);
+
 void	quicksort_a(t_stack *s, int size);
 void	quicksort_b(t_stack *s, int size);
+
+void	restore_sorted_from_b(t_stack *s);
+int		find_max_pos(t_item *stack);
+void	restore_by_max(t_stack *s);
+void	restore_final_sort(t_stack *s);
+void	rotate_b_to_top(t_stack *s, int pos);
+
 void	sort_small_a(t_stack *s, int size);
 void	sort_small_b(t_stack *s, int size);
 void	sort_small_b_three(t_stack *s);
-void	rotate_b_to_top(t_stack *s, int pos);
-void	restore_sorted_from_b(t_stack *s);
-void	restore_by_max(t_stack *s);
-void	restore_final_sort(t_stack *s);
+
+int		get_pivot(t_item *a, int size);
 int		find_min_pos(t_item *stack);
 int		find_max_pos(t_item *stack);
 

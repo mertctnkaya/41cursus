@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:09:52 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/18 22:14:26 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/17 20:29:25 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 static void push_by_chunk(t_stack *s, int *target, int chunk)
 {
-	// target: işlenmeyi bekleyen en küçük sayı indexi 0, döngülü
-	// chunka göre pushla
-	// b ye atılmış ve geri alınması kolay hamle
-	// gerektirmeyen parçalar oluşturmak
 	if (s->a->index <= *target)
 	{
-		// stack a nın en üstündeki eleman targetten küçükse
 		pb(s, 1);
 		rb(&s->b, 1);
-		// neden rb: en küçük elemanlar en alta giderek derin bi yerde toplanır
-		// restore yaparken büyükleri üstte küçükleri alta koymak kolaylaştırır
-		(*target)++; // ilerle
+		(*target)++;
 	}
 	else if (s->a->index <= *target + chunk)
 	{
@@ -33,13 +26,12 @@ static void push_by_chunk(t_stack *s, int *target, int chunk)
 		(*target)++;
 	}
 	else
-	// target şu anki chunkın çok dışında büyük indexli
-	// neden ra: bunu atla
 		ra(&s->a, 1);
 }
 
 static void quick_sort_small(t_stack *s)
 {
+	// Küçük boyutlu stack'ler için sıralama yapar.
 	if (s->size_a == 2)
 		sort_2(&s->a);
 	else if (s->size_a == 3)
