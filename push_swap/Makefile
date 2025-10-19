@@ -1,5 +1,5 @@
 NAME		= push_swap
-BONUS_EXE	= 
+BONUS_NAME	= checker
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 DEBUG		= 0
@@ -28,15 +28,34 @@ SRC_FILES	= \
 	src/sorts/quick_sort/restore.c	\
 	src/sorts/quick_sort/recursive.c
 
+CHC_FILES	= \
+	src/checker/checker.c \
+	src/checker/extra_ops.c \
+	src/checker/checker_utils.c \
+	\
+	src/operations/push.c \
+	src/operations/rotate.c \
+	src/operations/rrotate.c \
+	src/operations/swap.c \
+	\
+	src/utils.c \
+	src/validation.c
+
 OBJ_DIR		= objs
-OBJ_FILES	= $(SRC_FILES:src/%.c=$(OBJ_DIR)/%.o)
+SRC_OBJS	= $(SRC_FILES:src/%.c=$(OBJ_DIR)/%.o)
+CHC_OBJS	= $(CHC_FILES:src/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
-bonus: $(NAME)
+bonus: $(BONUS_NAME)
 
-$(NAME): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME)
+# $(filter-out $(OBJ_DIR)/main.o, $(SRC_OBJS))
+
+$(BONUS_NAME): $(CHC_OBJS)
+	$(CC) $(CFLAGS) $(CHC_OBJS) -o $(BONUS_NAME)
+
+$(NAME): $(SRC_OBJS)
+	$(CC) $(CFLAGS) $(SRC_OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: src/%.c
 	@mkdir -p $(dir $@)
@@ -47,7 +66,8 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re 

@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 20:44:04 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 19:56:11 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/19 13:44:32 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void ra(t_item **a, int cout)
 
 void rb(t_item **b, int cout)
 {
-	// Stack B'nin tüm elemanlarını bir kez döndürür (rotate).
 	t_item *head;
 	t_item *tail;
 
