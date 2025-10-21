@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 19:38:55 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/19 20:42:38 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,14 @@ t_item *new_item(int num)
 
 static void check_duplicates(t_item *stack, int value)
 {
-	// Stack'te tekrar eden değer olup olmadığını kontrol eder.
 	t_item *current;
 
 	current = stack;
 	while (current)
 	{
 		if (current->value == value)
-			raise_error();		 // Eğer değer tekrar ediyorsa, hata verir.
-		current = current->next; // Bir sonraki elemana geçer.
+			raise_error();
+		current = current->next;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 23:11:18 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 19:48:47 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:11:00 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ long atol_check(const char *str)
 	while ((*str >= 48 && *str <= 57))
 	{
 		res = res * 10 + (*str - '0');
-		if ((sign == 1 && res > 2147483647) || (sign == -1 && res > 2147483648))
+		if (res > 2147483647 + (sign < 0))
 			raise_error();
 		str++;
 	}
@@ -62,19 +62,18 @@ long atol_check(const char *str)
 
 int match_case(t_item *a, int *n)
 {
-	// Stack'in ilk dört elemanının belirli bir sıraya uyup uymadığını kontrol eder.
-	return (a->index == n[0] && a->next->index == n[1] && a->next->next->index == n[2] && a->next->next->next->index == n[3]);
+	return (a->index == n[0] && a->next->index == n[1]
+		&& a->next->next->index == n[2] && a->next->next->next->index == n[3]);
 }
 
 int do_operations(t_stack *s, int op)
 {
-	// Bitwise işlemlerle birden fazla operasyonu aynı anda uygular.
 	if (op & 1)
-		sa(&s->a, 1); // Swap işlemi.
+		sa(&s->a, 1);
 	if (op & 2)
-		ra(&s->a, 1); // Rotate işlemi.
+		ra(&s->a, 1);
 	if (op & 4)
-		rra(&s->a, 1); // Reverse rotate işlemi.
+		rra(&s->a, 1);
 	if (op & 8)
 	{
 		sa(&s->a, 1);

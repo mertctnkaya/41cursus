@@ -22,8 +22,7 @@ SRC_FILES	= \
 	src/sorts/medium.c			\
 	\
 	src/sorts/qs_main.c			\
-	src/sorts/qs_utils.c		\
-	src/sorts/qs_restore.c
+	src/sorts/qs_utils.c
 
 CHC_FILES	= \
 	src/checker/checker.c		\

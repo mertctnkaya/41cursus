@@ -6,13 +6,13 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:06:54 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/19 20:12:28 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:40:44 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void rotate_b_to_top(t_stack *s, int pos)
+static void rotate_b_to_top(t_stack *s, int pos)
 {
 	int moves;
 
@@ -29,7 +29,7 @@ void rotate_b_to_top(t_stack *s, int pos)
 	}
 }
 
-int find_min_pos(t_item *stack)
+static int find_min_pos(t_item *stack)
 {
 	int		min;
 	int		pos;
@@ -55,8 +55,7 @@ int find_min_pos(t_item *stack)
 	return (min_pos);
 }
 
-
-int find_max_pos(t_item *stack)
+static int find_max_pos(t_item *stack)
 {
 	int pos;
 	int max_pos;
@@ -66,7 +65,7 @@ int find_max_pos(t_item *stack)
 	if (!stack)
 		return (0);
 	cur = stack;
-	max = cur->index; // ilk elemanı max olarak varsayar
+	max = cur->index;
 	max_pos = 0;
 	pos = 0;
 	while (cur)
@@ -80,4 +79,36 @@ int find_max_pos(t_item *stack)
 		pos++;
 	}
 	return (max_pos);
+}
+
+void restore_by_max(t_stack *s)
+{
+	int pos;
+
+	while (s->size_b > 0)
+	{
+		pos = find_max_pos(s->b); 
+		rotate_b_to_top(s, pos);
+		pa(s, 1);
+	}
+	if (!is_sorted(s->a))
+		restore_final_sort(s);
+}
+
+void restore_final_sort(t_stack *s)
+{
+	int min_pos;
+
+	min_pos = find_min_pos(s->a);
+	if (min_pos <= s->size_a / 2)
+	{
+		while (min_pos-- > 0)
+			ra(&s->a, 1);
+	}
+	else
+	{
+		min_pos = s->size_a - min_pos;
+		while (min_pos-- > 0)
+			rra(&s->a, 1);
+	}
 }

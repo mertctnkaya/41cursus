@@ -6,13 +6,13 @@
 /*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 22:32:19 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 20:23:44 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:35:03 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void bring_to_top(t_item **a, int index, int size_a)
+static void bring_to_top(t_item **a, int index, int size_a)
 {
 	int pos;
 	t_item *temp;
