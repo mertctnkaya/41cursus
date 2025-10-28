@@ -1,13 +1,23 @@
-#include "../../push_swap.h"
-#include <stdio.h>
-#include <string.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/28 12:04:20 by mecetink          #+#    #+#             */
+/*   Updated: 2025/10/28 13:11:07 by mecetink         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void free_stack(t_item *stack)
+#include "./checker_bonus.h"
+
+static void	free_stack(t_item *stack)
 {
-	t_item *temp;
+	t_item	*temp;
 
 	if (!stack)
-		return;
+		return ;
 	while (stack)
 	{
 		temp = stack->next;
@@ -16,7 +26,7 @@ static void free_stack(t_item *stack)
 	}
 }
 
-static int apply_operation_per_line(t_stack *s, char *line)
+static int	apply_operation_per_line(t_stack *s, char *line)
 {
 	if (!ft_strcmp(line, "sa\n") || !ft_strcmp(line, "sa"))
 		sa(&s->a, 0);
@@ -45,20 +55,19 @@ static int apply_operation_per_line(t_stack *s, char *line)
 	return (1);
 }
 
-static char *read_line_stdin(void)
+static char	*read_line_stdin(void)
 {
 	char	buf[5];
 	char	c;
 	char	*out;
 	int		len;
-	ssize_t	r;
 
 	len = 0;
-	while (len < 4 && (r = read(0, &c, 1)) > 0)
+	while (len < 4 && (read(0, &c, 1)) > 0)
 	{
 		buf[len++] = c;
 		if (c == '\n')
-			break;
+			break ;
 	}
 	if (len == 0)
 		return (NULL);
@@ -70,28 +79,30 @@ static char *read_line_stdin(void)
 	return (out);
 }
 
-static int check_lines(t_stack s)
+static int	check_lines(t_stack s)
 {
 	char	*line;
 
-	while ((line = read_line_stdin()) != NULL)
+	line = read_line_stdin();
+	while (line != NULL)
 	{
 		if (!apply_operation_per_line(&s, line))
 		{
-			write(2, "Error\n", 6);
+			raise_error();
 			free(line);
 			free_stack(s.a);
 			free_stack(s.b);
 			return (-1);
 		}
 		free(line);
+		line = read_line_stdin();
 	}
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stack s;
+	t_stack	s;
 
 	if (argc == 1)
 		exit(1);

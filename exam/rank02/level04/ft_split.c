@@ -1,6 +1,26 @@
 #include "../../lib.h"
 
-char **split(char *str, char sep)
+char **ft_splt(char *str)
+{
+	int i = 0, j = 0, k = 0;
+	char **arr = malloc(100000);
+	while (str[i])
+	{
+		if (str[i] == 32)
+			i++;
+		if (!str[i])
+			break;
+		j = 0;
+		arr[k] = malloc(100000);
+		while (str[i] && str[i] != ' ')
+			arr[k][j++] = str[i++];
+		arr[k++][j] = 0; // null to string's end
+	}
+	arr[k] = 0; // null to end of array
+	return arr;
+}
+
+char **ft_split(char *str, char sep)
 {
 	int words = 0;
 	char **arr = malloc(10000000); // 10MB
@@ -29,7 +49,7 @@ char **split(char *str, char sep)
 
 int main()
 {
-	char **arr = ft_split("abc,,def,hgi", ',');
+	char **arr = ft_splt("  abc def hgi  ");
 	int i = 0;
 	while (arr[i])
 	{

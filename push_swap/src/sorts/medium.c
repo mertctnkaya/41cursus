@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   medium.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 22:32:19 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/21 18:35:03 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:13:50 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-static void bring_to_top(t_item **a, int index, int size_a)
+static void	bring_to_top(t_item **a, int index, int size_a)
 {
-	int pos;
-	t_item *temp;
+	int		pos;
+	t_item	*temp;
 
 	pos = 0;
 	temp = *a;
 	while (temp)
 	{
 		if (temp->index == index)
-			break;
+			break ;
 		temp = temp->next;
 		pos++;
 	}
@@ -39,34 +39,34 @@ static void bring_to_top(t_item **a, int index, int size_a)
 	}
 }
 
-static int check_special_4(t_stack *s)
+static int	check_special_4(t_stack *s)
 {
-	if (match_case(s->a, (int[]){3, 2, 0, 1}))
+	if (match_case(s->a, (int []){3, 2, 0, 1}))
 		return (do_operations(s, 8));
-	if (match_case(s->a, (int[]){0, 2, 3, 1}))
+	if (match_case(s->a, (int []){0, 2, 3, 1}))
 		return (do_operations(s, 4 | 1));
-	if (match_case(s->a, (int[]){0, 3, 1, 2}))
+	if (match_case(s->a, (int []){0, 3, 1, 2}))
 		return (do_operations(s, 1 | 2));
-	if (match_case(s->a, (int[]){3, 1, 2, 0}))
+	if (match_case(s->a, (int []){3, 1, 2, 0}))
 		return (do_operations(s, 2 | 4));
 	return (0);
 }
 
-void sort_4(t_stack *s)
+void	sort_4(t_stack *s)
 {
 	if (is_sorted(s->a))
-		return;
+		return ;
 	if (check_special_4(s))
-		return;
+		return ;
 	bring_to_top(&s->a, 0, s->size_a);
 	if (is_sorted(s->a))
-		return;
+		return ;
 	pb(s, 1);
 	sort_3(&s->a);
 	pa(s, 1);
 }
 
-static void push_smallest_two(t_stack *s)
+static void	push_smallest_two(t_stack *s)
 {
 	bring_to_top(&s->a, 0, s->size_a);
 	pb(s, 1);
@@ -74,10 +74,10 @@ static void push_smallest_two(t_stack *s)
 	pb(s, 1);
 }
 
-void sort_5(t_stack *s)
+void	sort_5(t_stack *s)
 {
 	if (is_sorted(s->a))
-		return;
+		return ;
 	push_smallest_two(s);
 	sort_3(&s->a);
 	if (s->b->index < s->b->next->index)

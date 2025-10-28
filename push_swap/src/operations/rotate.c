@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 20:44:04 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/19 13:44:32 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:14:52 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void ra(t_item **a, int cout)
+void	ra(t_item **a, int cout)
 {
-	t_item *head;
-	t_item *tail;
+	t_item	*head;
+	t_item	*tail;
 
 	if (!*a || !(*a)->next)
-		return;
+		return ;
 	head = *a;
 	tail = *a;
 	while (tail->next)
@@ -32,13 +32,13 @@ void ra(t_item **a, int cout)
 		write(1, "ra\n", 3);
 }
 
-void rb(t_item **b, int cout)
+void	rb(t_item **b, int cout)
 {
-	t_item *head;
-	t_item *tail;
+	t_item	*head;
+	t_item	*tail;
 
 	if (!*b || !(*b)->next)
-		return;
+		return ;
 	head = *b;
 	tail = *b;
 	while (tail->next)

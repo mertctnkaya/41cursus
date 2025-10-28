@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 22:32:11 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 19:57:02 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:15:10 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void pa(t_stack *s, int cout)
+void	pa(t_stack *s, int cout)
 {
-	t_item *temp;
+	t_item	*temp;
 
 	if (!s->b)
-		return;
+		return ;
 	temp = s->b;
 	s->b = s->b->next;
 	if (s->b)
@@ -32,12 +32,12 @@ void pa(t_stack *s, int cout)
 		write(1, "pa\n", 3);
 }
 
-void pb(t_stack *s, int cout)
+void	pb(t_stack *s, int cout)
 {
-	t_item *temp;
+	t_item	*temp;
 
 	if (!s->a)
-		return;
+		return ;
 	temp = s->a;
 	s->a = s->a->next;
 	if (s->a)
@@ -48,7 +48,6 @@ void pb(t_stack *s, int cout)
 	s->b = temp;
 	s->size_a--;
 	s->size_b++;
-
 	if (cout)
 		write(1, "pb\n", 3);
 }

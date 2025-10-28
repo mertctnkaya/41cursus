@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 23:11:18 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/21 18:11:00 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:17:34 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void raise_error(void)
+void	raise_error(void)
 {
 	write(1, "Error\n", 6);
 	exit(1);
 }
 
-int is_sorted(t_item *stack)
+int	is_sorted(t_item *stack)
 {
 	if (!stack)
 		return (1);
@@ -31,10 +31,10 @@ int is_sorted(t_item *stack)
 	return (1);
 }
 
-long atol_check(const char *str)
+long	atol_check(const char *str)
 {
-	long res;
-	int sign;
+	long	res;
+	int		sign;
 
 	res = 0;
 	sign = 1;
@@ -60,13 +60,13 @@ long atol_check(const char *str)
 	return (res * sign);
 }
 
-int match_case(t_item *a, int *n)
+int	match_case(t_item *a, int *n)
 {
 	return (a->index == n[0] && a->next->index == n[1]
 		&& a->next->next->index == n[2] && a->next->next->next->index == n[3]);
 }
 
-int do_operations(t_stack *s, int op)
+int	do_operations(t_stack *s, int op)
 {
 	if (op & 1)
 		sa(&s->a, 1);

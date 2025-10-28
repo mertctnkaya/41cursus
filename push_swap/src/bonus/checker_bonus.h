@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 14:31:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/28 12:56:33 by mecetink         ###   ########.fr       */
+/*   Created: 2025/10/28 12:03:31 by mecetink          #+#    #+#             */
+/*   Updated: 2025/10/28 13:01:11 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -33,9 +33,6 @@ typedef struct s_stack
 	int		total_size;
 }	t_stack;
 
-void	quick_sort(t_stack *s);
-void	restore_by_max(t_stack *s);
-void	restore_final_sort(t_stack *s);
 t_item	*parse_and_create_stack(int argc, char **argv, int *size);
 void	assign_index(t_item **stack, int size);
 int		is_sorted(t_item *stack);
@@ -62,5 +59,12 @@ void	sort_3(t_item **a);
 
 void	sort_4(t_stack *s);
 void	sort_5(t_stack *s);
+
+void	rrr(t_item **a, t_item **b, int cout);
+void	rr(t_item **a, t_item **b, int cout);
+void	ss(t_item **a, t_item **b, int cout);
+
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

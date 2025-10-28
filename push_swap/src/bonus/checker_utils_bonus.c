@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_utils.c                                    :+:      :+:    :+:   */
+/*   checker_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 14:48:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/19 17:27:42 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:06:48 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../push_swap.h"
+#include "./checker_bonus.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	unsigned char a;
-	unsigned char b;
+	unsigned char	a;
+	unsigned char	b;
 
 	while (*s1 || *s2)
 	{

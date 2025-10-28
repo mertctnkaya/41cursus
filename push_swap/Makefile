@@ -25,9 +25,9 @@ SRC_FILES	= \
 	src/sorts/qs_utils.c
 
 CHC_FILES	= \
-	src/checker/checker.c		\
-	src/checker/extra_ops.c		\
-	src/checker/checker_utils.c \
+	src/bonus/checker_bonus.c		\
+	src/bonus/extra_ops_bonus.c		\
+	src/bonus/checker_utils_bonus.c \
 	\
 	src/operations/push.c		\
 	src/operations/rotate.c		\

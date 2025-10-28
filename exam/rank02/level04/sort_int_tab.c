@@ -2,8 +2,7 @@
 
 void sort_int_tab(int *tab, unsigned int size)
 {
-	unsigned int i = 0, j = 0;
-	int temp;
+	unsigned int i = 0, j = 0, temp;
 
 	while (i < size - 1)
 	{
@@ -20,4 +19,11 @@ void sort_int_tab(int *tab, unsigned int size)
 		}
 		i++;
 	}
+}
+
+int main()
+{
+	int a[5] = {5,1,3,2,4};
+	sort_int_tab(a, 5);
+	printf("%d", a[1]);
 }

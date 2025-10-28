@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   qs_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:06:54 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/21 18:40:44 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:12:33 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-static void rotate_b_to_top(t_stack *s, int pos)
+static void	rotate_b_to_top(t_stack *s, int pos)
 {
-	int moves;
+	int	moves;
 
 	if (pos <= s->size_b / 2)
 	{
@@ -29,7 +29,7 @@ static void rotate_b_to_top(t_stack *s, int pos)
 	}
 }
 
-static int find_min_pos(t_item *stack)
+static int	find_min_pos(t_item *stack)
 {
 	int		min;
 	int		pos;
@@ -55,12 +55,12 @@ static int find_min_pos(t_item *stack)
 	return (min_pos);
 }
 
-static int find_max_pos(t_item *stack)
+static int	find_max_pos(t_item *stack)
 {
-	int pos;
-	int max_pos;
-	int max;
-	t_item *cur;
+	int		pos;
+	int		max_pos;
+	int		max;
+	t_item	*cur;
 
 	if (!stack)
 		return (0);
@@ -81,13 +81,13 @@ static int find_max_pos(t_item *stack)
 	return (max_pos);
 }
 
-void restore_by_max(t_stack *s)
+void	restore_by_max(t_stack *s)
 {
-	int pos;
+	int	pos;
 
 	while (s->size_b > 0)
 	{
-		pos = find_max_pos(s->b); 
+		pos = find_max_pos(s->b);
 		rotate_b_to_top(s, pos);
 		pa(s, 1);
 	}
@@ -95,9 +95,9 @@ void restore_by_max(t_stack *s)
 		restore_final_sort(s);
 }
 
-void restore_final_sort(t_stack *s)
+void	restore_final_sort(t_stack *s)
 {
-	int min_pos;
+	int	min_pos;
 
 	min_pos = find_min_pos(s->a);
 	if (min_pos <= s->size_a / 2)

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/19 20:42:38 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:17:01 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_item *new_item(int num)
+t_item	*new_item(int num)
 {
-	t_item *new;
+	t_item	*new;
 
 	new = (t_item *)malloc(sizeof(t_item));
 	if (!new)
@@ -26,9 +26,9 @@ t_item *new_item(int num)
 	return (new);
 }
 
-static void check_duplicates(t_item *stack, int value)
+static void	check_duplicates(t_item *stack, int value)
 {
-	t_item *current;
+	t_item	*current;
 
 	current = stack;
 	while (current)
@@ -39,7 +39,7 @@ static void check_duplicates(t_item *stack, int value)
 	}
 }
 
-static void append_item(t_item **a, t_item **current, t_item *item)
+static void	append_item(t_item **a, t_item **current, t_item *item)
 {
 	if (!*a)
 		*a = item;
@@ -51,13 +51,13 @@ static void append_item(t_item **a, t_item **current, t_item *item)
 	*current = item;
 }
 
-t_item *parse_and_create_stack(int argc, char **argv, int *size)
+t_item	*parse_and_create_stack(int argc, char **argv, int *size)
 {
-	t_item *a;
-	t_item *current;
-	t_item *new;
-	long num;
-	int i;
+	t_item	*a;
+	t_item	*current;
+	t_item	*new;
+	long	num;
+	int		i;
 
 	if (argc < 2)
 		exit(0);
@@ -79,22 +79,22 @@ t_item *parse_and_create_stack(int argc, char **argv, int *size)
 	return (a);
 }
 
-void assign_index(t_item **stack, int size)
+void	assign_index(t_item **stack, int size)
 {
-	t_item *current;
-	t_item *lowest;
-	int index;
+	t_item	*cur;
+	t_item	*lowest;
+	int		index;
 
 	index = 0;
 	while (index < size)
 	{
 		lowest = NULL;
-		current = *stack;
-		while (current)
+		cur = *stack;
+		while (cur)
 		{
-			if (current->index == -1 && (!lowest || current->value < lowest->value))
-				lowest = current;
-			current = current->next;
+			if (cur->index == -1 && (!lowest || cur->value < lowest->value))
+				lowest = cur;
+			cur = cur->next;
 		}
 		if (lowest)
 			lowest->index = index;

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   rrotate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 20:44:17 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/17 19:57:06 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:15:39 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void rra(t_item **a, int cout)
+void	rra(t_item **a, int cout)
 {
-	t_item *head;
-	t_item *tail;
+	t_item	*head;
+	t_item	*tail;
 
 	if (!*a || !(*a)->next)
-		return;
+		return ;
 	head = *a;
 	tail = *a;
 	while (tail->next)
@@ -32,18 +32,17 @@ void rra(t_item **a, int cout)
 		write(1, "rra\n", 4);
 }
 
-void rrb(t_item **b, int cout)
+void	rrb(t_item **b, int cout)
 {
-	t_item *head;
-	t_item *tail;
+	t_item	*head;
+	t_item	*tail;
 
 	if (!*b || !(*b)->next)
-		return;
+		return ;
 	head = *b;
 	tail = *b;
 	while (tail->next)
 		tail = tail->next;
-
 	tail->prev->next = NULL;
 	tail->prev = NULL;
 	tail->next = head;
