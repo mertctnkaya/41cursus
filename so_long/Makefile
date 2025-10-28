@@ -8,27 +8,17 @@ SRC_DIR		= src
 OBJ_DIR		= obj
 INC_DIR		= includes
 
-SRCS		= main.c \
-			  game_init.c
-#			  game_loop.c \
-#			  map_parser.c \
-#			  map_validator.c \
-#			  player_movement.c \
-#			  render.c \
-#			  utils.c
+SRCS		= main.c
 
-# Add src/ prefix to source files
 SRC_FILES	= $(addprefix $(SRC_DIR)/, $(SRCS))
 
-# Object files
 OBJS		= $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-# Header files
-INCLUDES	= -I $(INC_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) -I $(FT_PRINTF_DIR)
+incs = -I$(MLXDIR)
+libs = $(mlxdir)/libmlx_Linux.a -lXext -lX11 -lm
 
-# MinilibX (mlx_linux)
-MLX_DIR		= mlx_linux
-MLX_LIB		= $(MLX_DIR)/libmlx.a
+MLX_DIR		= minilibx-linux
+MLX_LIB		= $(MLX_DIR)/minilibx_.a
 MLX_FLAGS	= -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # Libft
