@@ -12,26 +12,20 @@
 
 #include "../push_swap.h"
 
-void	raise_error(void)
+int	is_sorted(t_node *node)
 {
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-int	is_sorted(t_item *stack)
-{
-	if (!stack)
+	if (!node)
 		return (1);
-	while (stack->next)
+	while (node->next)
 	{
-		if (stack->index > stack->next->index)
+		if (node->index > node->next->index)
 			return (0);
-		stack = stack->next;
+		node = node->next;
 	}
 	return (1);
 }
 
-long	atol_check(const char *str)
+long	atol_check(const char *str, t_node *a)
 {
 	long	res;
 	int		sign;
@@ -47,20 +41,20 @@ long	atol_check(const char *str)
 		str++;
 	}
 	if (!(*str >= 48 && *str <= 57))
-		raise_error();
+		raise_error(a, 0);
 	while ((*str >= 48 && *str <= 57))
 	{
 		res = res * 10 + (*str - '0');
 		if (res > 2147483647 + (sign < 0))
-			raise_error();
+			raise_error(a, 0);
 		str++;
 	}
 	if (*str != '\0')
-		raise_error();
+		raise_error(a, 0);
 	return (res * sign);
 }
 
-int	match_case(t_item *a, int *n)
+int	match_case(t_node *a, int *n)
 {
 	return (a->index == n[0] && a->next->index == n[1]
 		&& a->next->next->index == n[2] && a->next->next->next->index == n[3]);

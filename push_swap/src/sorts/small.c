@@ -12,20 +12,12 @@
 
 #include "../../push_swap.h"
 
-void	sort_2(t_item **a)
-{
-	if (!is_sorted(*a))
-		sa(a, 1);
-}
-
-void	sort_3(t_item **a)
+void	sort_3(t_node **a)
 {
 	int	top;
 	int	mid;
 	int	bot;
 
-	if (is_sorted(*a))
-		return ;
 	top = (*a)->index;
 	mid = (*a)->next->index;
 	bot = (*a)->next->next->index;

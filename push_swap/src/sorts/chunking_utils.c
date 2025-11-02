@@ -29,16 +29,16 @@ static void	rotate_b_to_top(t_stack *s, int pos)
 	}
 }
 
-static int	find_min_pos(t_item *stack)
+static int	find_min_pos(t_node *node)
 {
 	int		min;
 	int		pos;
 	int		min_pos;
-	t_item	*cur;
+	t_node	*cur;
 
-	if (!stack)
+	if (!node)
 		return (0);
-	cur = stack;
+	cur = node;
 	min = cur->index;
 	min_pos = 0;
 	pos = 0;
@@ -55,16 +55,16 @@ static int	find_min_pos(t_item *stack)
 	return (min_pos);
 }
 
-static int	find_max_pos(t_item *stack)
+static int	find_max_pos(t_node *node)
 {
 	int		pos;
 	int		max_pos;
 	int		max;
-	t_item	*cur;
+	t_node	*cur;
 
-	if (!stack)
+	if (!node)
 		return (0);
-	cur = stack;
+	cur = node;
 	max = cur->index;
 	max_pos = 0;
 	pos = 0;

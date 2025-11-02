@@ -14,7 +14,7 @@
 
 void	pa(t_stack *s, int cout)
 {
-	t_item	*temp;
+	t_node	*temp;
 
 	if (!s->b)
 		return ;
@@ -34,7 +34,7 @@ void	pa(t_stack *s, int cout)
 
 void	pb(t_stack *s, int cout)
 {
-	t_item	*temp;
+	t_node	*temp;
 
 	if (!s->a)
 		return ;

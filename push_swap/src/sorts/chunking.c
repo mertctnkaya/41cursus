@@ -29,30 +29,11 @@ static void	push_by_chunk(t_stack *s, int *target, int chunk)
 		ra(&s->a, 1);
 }
 
-static void	small_sort(t_stack *s)
-{
-	if (s->size_a == 2)
-		sort_2(&s->a);
-	else if (s->size_a == 3)
-		sort_3(&s->a);
-	else if (s->size_a == 4)
-		sort_4(s);
-	else if (s->size_a == 5)
-		sort_5(s);
-}
-
-void	quick_sort(t_stack *s)
+void	chunking_sort(t_stack *s)
 {
 	int	target;
 	int	chunk;
 
-	if (is_sorted(s->a))
-		return ;
-	if (s->size_a <= 5)
-	{
-		small_sort(s);
-		return ;
-	}
 	if (s->total_size <= 100)
 		chunk = 15;
 	else

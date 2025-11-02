@@ -12,13 +12,13 @@
 
 #include "../push_swap.h"
 
-t_item	*new_item(int num)
+t_node	*new_item(int num)
 {
-	t_item	*new;
+	t_node	*new;
 
-	new = (t_item *)malloc(sizeof(t_item));
+	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
-		raise_error();
+		raise_error(0, 0);
 	new->prev = 0;
 	new->next = 0;
 	new->index = -1;
@@ -26,20 +26,20 @@ t_item	*new_item(int num)
 	return (new);
 }
 
-static void	check_duplicates(t_item *stack, int value)
+static void	check_duplicates(t_node *stack, int value)
 {
-	t_item	*current;
+	t_node	*current;
 
 	current = stack;
 	while (current)
 	{
 		if (current->value == value)
-			raise_error();
+			raise_error(stack, 0);
 		current = current->next;
 	}
 }
 
-static void	append_item(t_item **a, t_item **current, t_item *item)
+static void	append_item(t_node **a, t_node **current, t_node *item)
 {
 	if (!*a)
 		*a = item;
@@ -51,27 +51,25 @@ static void	append_item(t_item **a, t_item **current, t_item *item)
 	*current = item;
 }
 
-t_item	*parse_and_create_stack(int argc, char **argv, int *size)
+t_node	*parse_and_create_stack(int argc, char **argv, int *size)
 {
-	t_item	*a;
-	t_item	*current;
-	t_item	*new;
+	t_node	*a;
+	t_node	*current;
+	t_node	*new;
 	long	num;
 	int		i;
 
-	if (argc < 2)
-		exit(0);
 	a = NULL;
 	current = NULL;
 	i = 1;
 	*size = 0;
 	while (i < argc)
 	{
-		num = atol_check(argv[i]);
+		num = atol_check(argv[i], a);
 		check_duplicates(a, (int)num);
 		new = new_item((int)num);
 		if (!new)
-			raise_error();
+			raise_error(a, 0);
 		append_item(&a, &current, new);
 		(*size)++;
 		i++;
@@ -79,10 +77,10 @@ t_item	*parse_and_create_stack(int argc, char **argv, int *size)
 	return (a);
 }
 
-void	assign_index(t_item **stack, int size)
+void	assign_index(t_node **stack, int size)
 {
-	t_item	*cur;
-	t_item	*lowest;
+	t_node	*cur;
+	t_node	*lowest;
 	int		index;
 
 	index = 0;

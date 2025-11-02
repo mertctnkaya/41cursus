@@ -12,9 +12,9 @@
 
 #include "../push_swap.h"
 
-static void	free_stack(t_item *stack)
+static void	free_stack(t_node *stack)
 {
-	t_item	*temp;
+	t_node	*temp;
 
 	if (!stack)
 		return ;
@@ -25,13 +25,12 @@ static void	free_stack(t_item *stack)
 		stack = temp;
 	}
 }
-
 static void	push_swap(t_stack *s)
 {
 	if (s->total_size <= 1)
 		return ;
 	if (s->total_size == 2)
-		sort_2(&s->a);
+		sa(&s->a, 1);
 	else if (s->total_size == 3)
 		sort_3(&s->a);
 	else if (s->total_size == 4)
@@ -39,14 +38,14 @@ static void	push_swap(t_stack *s)
 	else if (s->total_size == 5)
 		sort_5(s);
 	else
-		quick_sort(s);
+		chunking_sort(s);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	s;
 
-	if (argc == 1)
+	if (argc <= 2)
 		exit(1);
 	s.a = parse_and_create_stack(argc, argv, &s.total_size);
 	s.b = NULL;
@@ -56,7 +55,7 @@ int	main(int argc, char **argv)
 	if (is_sorted(s.a))
 	{
 		free_stack(s.a);
-		return (0);
+		exit(1);
 	}
 	push_swap(&s);
 	free_stack(s.a);

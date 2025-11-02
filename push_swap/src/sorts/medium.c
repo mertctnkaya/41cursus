@@ -12,10 +12,10 @@
 
 #include "../../push_swap.h"
 
-static void	bring_to_top(t_item **a, int index, int size_a)
+static void	bring_to_top(t_node **a, int index, int size_a)
 {
 	int		pos;
-	t_item	*temp;
+	t_node	*temp;
 
 	pos = 0;
 	temp = *a;
@@ -54,8 +54,6 @@ static int	check_special_4(t_stack *s)
 
 void	sort_4(t_stack *s)
 {
-	if (is_sorted(s->a))
-		return ;
 	if (check_special_4(s))
 		return ;
 	bring_to_top(&s->a, 0, s->size_a);
@@ -76,8 +74,6 @@ static void	push_smallest_two(t_stack *s)
 
 void	sort_5(t_stack *s)
 {
-	if (is_sorted(s->a))
-		return ;
 	push_smallest_two(s);
 	sort_3(&s->a);
 	if (s->b->index < s->b->next->index)

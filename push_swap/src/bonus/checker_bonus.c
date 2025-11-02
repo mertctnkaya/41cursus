@@ -12,17 +12,17 @@
 
 #include "./checker_bonus.h"
 
-static void	free_stack(t_item *stack)
+static void	free_stack(t_node *node)
 {
-	t_item	*temp;
+	t_node	*temp;
 
-	if (!stack)
+	if (!node)
 		return ;
-	while (stack)
+	while (node)
 	{
-		temp = stack->next;
-		free(stack);
-		stack = temp;
+		temp = node->next;
+		free(node);
+		node = temp;
 	}
 }
 
@@ -88,11 +88,8 @@ static int	check_lines(t_stack s)
 	{
 		if (!apply_operation_per_line(&s, line))
 		{
-			raise_error();
 			free(line);
-			free_stack(s.a);
-			free_stack(s.b);
-			return (-1);
+			raise_error(s.a, s.b);
 		}
 		free(line);
 		line = read_line_stdin();
@@ -104,7 +101,7 @@ int	main(int argc, char **argv)
 {
 	t_stack	s;
 
-	if (argc == 1)
+	if (argc <= 2)
 		exit(1);
 	s.a = parse_and_create_stack(argc, argv, &s.total_size);
 	s.b = NULL;

@@ -16,51 +16,54 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_item
+typedef struct s_node
 {
 	int				value;
 	int				index;
-	struct s_item	*prev;
-	struct s_item	*next;
-}	t_item;
+	struct s_node	*prev;
+	struct s_node	*next;
+}	t_node;
 
 typedef struct s_stack
 {
-	t_item	*a;
-	t_item	*b;
+	t_node	*a;
+	t_node	*b;
 	int		size_a;
 	int		size_b;
 	int		total_size;
 }	t_stack;
 
-void	quick_sort(t_stack *s);
-void	restore_by_max(t_stack *s);
-void	restore_final_sort(t_stack *s);
-t_item	*parse_and_create_stack(int argc, char **argv, int *size);
-void	assign_index(t_item **stack, int size);
-int		is_sorted(t_item *stack);
-
-void	raise_error(void);
-long	atol_check(const char *str);
-int		match_case(t_item *a, int *n);
+void	raise_error(t_node *a, t_node *b);
+int		is_sorted(t_node *node);
+long	atol_check(const char *str, t_node *a);
+int		match_case(t_node *a, int *n);
 int		do_operations(t_stack *s, int op);
 
-void	sa(t_item **a, int cout);
-void	sb(t_item **b, int cout);
+t_node	*parse_and_create_stack(int argc, char **argv, int *size);
+void	assign_index(t_node **node, int size);
+t_node	*new_item(int num);
+
+void	chunking_sort(t_stack *s);
+void	restore_by_max(t_stack *s);
+void	restore_final_sort(t_stack *s);
+
+void	sort_3(t_node **a);
+
+void	sort_4(t_stack *s);
+void	sort_5(t_stack *s);
+
+void	sa(t_node **a, int cout);
+void	sb(t_node **b, int cout);
 
 void	pa(t_stack *s, int cout);
 void	pb(t_stack *s, int cout);
 
-void	ra(t_item **a, int cout);
-void	rb(t_item **b, int cout);
+void	ra(t_node **a, int cout);
+void	rb(t_node **b, int cout);
 
-void	rra(t_item **a, int cout);
-void	rrb(t_item **b, int cout);
+void	rra(t_node **a, int cout);
+void	rrb(t_node **b, int cout);
 
-void	sort_2(t_item **a);
-void	sort_3(t_item **a);
 
-void	sort_4(t_stack *s);
-void	sort_5(t_stack *s);
 
 #endif

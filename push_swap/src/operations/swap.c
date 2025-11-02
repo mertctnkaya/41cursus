@@ -12,7 +12,7 @@
 
 #include "../../push_swap.h"
 
-void	sa(t_item **a, int cout)
+void	sa(t_node **a, int cout)
 {
 	int	temp_value;
 	int	temp_index;
@@ -29,7 +29,7 @@ void	sa(t_item **a, int cout)
 		write(1, "sa\n", 3);
 }
 
-void	sb(t_item **b, int cout)
+void	sb(t_node **b, int cout)
 {
 	int	temp_value;
 	int	temp_index;

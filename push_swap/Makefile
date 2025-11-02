@@ -9,32 +9,34 @@ ifeq ($(DEBUG), 1)
 endif
 
 SRC_FILES	= \
-	src/main.c					\
-	src/validation.c			\
-	src/utils.c					\
+	src/main.c						\
+	src/error.c					\
+	src/validation.c				\
+	src/utils.c						\
 	\
-	src/operations/swap.c		\
-	src/operations/push.c		\
-	src/operations/rotate.c		\
-	src/operations/rrotate.c	\
+	src/operations/swap.c			\
+	src/operations/push.c			\
+	src/operations/rotate.c			\
+	src/operations/rrotate.c		\
 	\
-	src/sorts/small.c			\
-	src/sorts/medium.c			\
+	src/sorts/small.c				\
+	src/sorts/medium.c				\
 	\
-	src/sorts/qs_main.c			\
-	src/sorts/qs_utils.c
+	src/sorts/chunking.c			\
+	src/sorts/chunking_utils.c
 
 CHC_FILES	= \
 	src/bonus/checker_bonus.c		\
 	src/bonus/extra_ops_bonus.c		\
-	src/bonus/checker_utils_bonus.c \
+	src/bonus/checker_utils_bonus.c	\
+	src/error.c					\
 	\
-	src/operations/push.c		\
-	src/operations/rotate.c		\
-	src/operations/rrotate.c	\
-	src/operations/swap.c		\
+	src/operations/push.c			\
+	src/operations/rotate.c			\
+	src/operations/rrotate.c		\
+	src/operations/swap.c			\
 	\
-	src/utils.c					\
+	src/utils.c						\
 	src/validation.c
 
 OBJ_DIR		= objs

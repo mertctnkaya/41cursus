@@ -12,10 +12,10 @@
 
 #include "../../push_swap.h"
 
-void	rra(t_item **a, int cout)
+void	rra(t_node **a, int cout)
 {
-	t_item	*head;
-	t_item	*tail;
+	t_node	*head;
+	t_node	*tail;
 
 	if (!*a || !(*a)->next)
 		return ;
@@ -32,10 +32,10 @@ void	rra(t_item **a, int cout)
 		write(1, "rra\n", 4);
 }
 
-void	rrb(t_item **b, int cout)
+void	rrb(t_node **b, int cout)
 {
-	t_item	*head;
-	t_item	*tail;
+	t_node	*head;
+	t_node	*tail;
 
 	if (!*b || !(*b)->next)
 		return ;
