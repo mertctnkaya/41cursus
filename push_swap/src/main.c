@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:48:24 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/28 13:18:12 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:12:43 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ static void	free_stack(t_node *stack)
 		stack = temp;
 	}
 }
+
+void	raise_error(t_node *a, t_node *b)
+{
+	write(2, "Error\n", 6);
+	if (a)
+		free_stack(a);
+	if (b)
+		free_stack(b);
+	exit(1);
+}
+
 static void	push_swap(t_stack *s)
 {
 	if (s->total_size <= 1)

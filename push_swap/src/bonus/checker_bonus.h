@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:03:31 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/28 13:01:11 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:09:20 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ typedef struct s_stack
 }	t_stack;
 
 void	raise_error(t_node *a, t_node *b);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
+long	atol_check(const char *str, t_node *a);
+
 t_node	*parse_and_create_stack(int argc, char **argv, int *size);
 void	assign_index(t_node **node, int size);
-t_node	*new_item(int num);
 int		is_sorted(t_node *node);
 
 void	sa(t_node **a, int cout);
@@ -54,8 +57,5 @@ void	rrb(t_node **b, int cout);
 void	rrr(t_node **a, t_node **b, int cout);
 void	rr(t_node **a, t_node **b, int cout);
 void	ss(t_node **a, t_node **b, int cout);
-
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

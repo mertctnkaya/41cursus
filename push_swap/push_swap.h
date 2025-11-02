@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:31:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/28 12:56:33 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:11:54 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		do_operations(t_stack *s, int op);
 
 t_node	*parse_and_create_stack(int argc, char **argv, int *size);
 void	assign_index(t_node **node, int size);
-t_node	*new_item(int num);
 
 void	chunking_sort(t_stack *s);
 void	restore_by_max(t_stack *s);

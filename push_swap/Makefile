@@ -10,7 +10,6 @@ endif
 
 SRC_FILES	= \
 	src/main.c						\
-	src/error.c					\
 	src/validation.c				\
 	src/utils.c						\
 	\
@@ -26,18 +25,15 @@ SRC_FILES	= \
 	src/sorts/chunking_utils.c
 
 CHC_FILES	= \
-	src/bonus/checker_bonus.c		\
-	src/bonus/extra_ops_bonus.c		\
-	src/bonus/checker_utils_bonus.c	\
-	src/error.c					\
+	src/bonus/main_bonus.c		\
+	src/bonus/extra_ops_bonus.c	\
+	src/bonus/utils_bonus.c	\
+	src/bonus/validation_bonus.c	\
 	\
 	src/operations/push.c			\
 	src/operations/rotate.c			\
 	src/operations/rrotate.c		\
-	src/operations/swap.c			\
-	\
-	src/utils.c						\
-	src/validation.c
+	src/operations/swap.c
 
 OBJ_DIR		= objs
 SRC_OBJS	= $(SRC_FILES:src/%.c=$(OBJ_DIR)/%.o)

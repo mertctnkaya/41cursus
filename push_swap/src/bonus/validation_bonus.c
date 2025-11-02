@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   validation_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/10/28 13:17:01 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:09:35 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "./checker_bonus.h"
 
 static t_node	*new_item(int num)
 {
@@ -26,15 +26,15 @@ static t_node	*new_item(int num)
 	return (new);
 }
 
-static void	check_duplicates(t_node *stack, int value)
+static void	check_duplicates(t_node *node, int value)
 {
 	t_node	*current;
 
-	current = stack;
+	current = node;
 	while (current)
 	{
 		if (current->value == value)
-			raise_error(stack, 0);
+			raise_error(node, 0);
 		current = current->next;
 	}
 }
@@ -77,7 +77,7 @@ t_node	*parse_and_create_stack(int argc, char **argv, int *size)
 	return (a);
 }
 
-void	assign_index(t_node **stack, int size)
+void	assign_index(t_node **node, int size)
 {
 	t_node	*cur;
 	t_node	*lowest;
@@ -87,7 +87,7 @@ void	assign_index(t_node **stack, int size)
 	while (index < size)
 	{
 		lowest = NULL;
-		cur = *stack;
+		cur = *node;
 		while (cur)
 		{
 			if (cur->index == -1 && (!lowest || cur->value < lowest->value))

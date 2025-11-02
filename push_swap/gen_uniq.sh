@@ -63,7 +63,7 @@ parse_args() {
 
   if [ "$CHECK" -eq 1 ]; then
     RESULT=$(./push_swap $NUMS | ./checker $NUMS)
-	MOVES=$(./push_swap $NUMS | wc -l)
+	  MOVES=$(./push_swap $NUMS | wc -l)
     if [ "$RESULT" = "OK" ]; then
 	  	echo -e "${RED}Moves: ${MOVES}${RESET}"
       echo -e "${GREEN}Checker Result: OK${RESET}"
