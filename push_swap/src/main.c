@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:48:24 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/02 16:12:43 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:38:42 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ static void	push_swap(t_stack *s)
 		sa(&s->a, 1);
 	else if (s->total_size == 3)
 		sort_3(&s->a);
-	else if (s->total_size == 4)
-		sort_4(s);
-	else if (s->total_size == 5)
+	else if (s->total_size <= 5)
 		sort_5(s);
 	else
 		chunking_sort(s);
