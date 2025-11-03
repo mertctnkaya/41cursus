@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:03:31 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/02 16:09:20 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:05:01 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	raise_error(t_node *a, t_node *b);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 long	atol_check(const char *str, t_node *a);
+void	free_stack(t_node *node);
 
 t_node	*parse_and_create_stack(int argc, char **argv, int *size);
 void	assign_index(t_node **node, int size);

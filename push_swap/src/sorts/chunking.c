@@ -6,11 +6,54 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:09:52 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/02 18:39:25 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:23:39 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
+
+static void	rotate_b_to_top(t_stack *s, int pos)
+{
+	int	moves;
+
+	if (pos <= s->size_b / 2)
+	{
+		while (pos-- > 0)
+			rb(&s->b, 1);
+	}
+	else
+	{
+		moves = s->size_b - pos;
+		while (moves-- > 0)
+			rrb(&s->b, 1);
+	}
+}
+
+static int	find_max_pos(t_node *node)
+{
+	int		pos;
+	int		max_pos;
+	int		max;
+	t_node	*cur;
+
+	if (!node)
+		return (0);
+	cur = node;
+	max = cur->index;
+	max_pos = 0;
+	pos = 0;
+	while (cur)
+	{
+		if (cur->index > max)
+		{
+			max = cur->index;
+			max_pos = pos;
+		}
+		cur = cur->next;
+		pos++;
+	}
+	return (max_pos);
+}
 
 static void	push_by_chunk(t_stack *s, int *target, int chunk)
 {
@@ -27,6 +70,18 @@ static void	push_by_chunk(t_stack *s, int *target, int chunk)
 	}
 	else
 		ra(&s->a, 1);
+}
+
+static void	restore_by_max(t_stack *s)
+{
+	int	pos;
+
+	while (s->size_b > 0)
+	{
+		pos = find_max_pos(s->b);
+		rotate_b_to_top(s, pos);
+		pa(s, 1);
+	}
 }
 
 void	chunking_sort(t_stack *s)

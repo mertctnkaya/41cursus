@@ -5,7 +5,7 @@ CFLAGS		= -Wall -Wextra -Werror
 DEBUG		= 0
 
 ifeq ($(DEBUG), 1)
-	CFLAGS += -g -fsanitize=address
+	CFLAGS += -g -fsanitize=address,leak
 endif
 
 SRC_FILES	= \
@@ -21,13 +21,12 @@ SRC_FILES	= \
 	src/sorts/small.c				\
 	src/sorts/medium.c				\
 	\
-	src/sorts/chunking.c			\
-	src/sorts/chunking_utils.c
+	src/sorts/chunking.c
 
 CHC_FILES	= \
-	src/bonus/main_bonus.c		\
-	src/bonus/extra_ops_bonus.c	\
-	src/bonus/utils_bonus.c	\
+	src/bonus/main_bonus.c			\
+	src/bonus/extra_ops_bonus.c		\
+	src/bonus/utils_bonus.c			\
 	src/bonus/validation_bonus.c	\
 	\
 	src/operations/push.c			\

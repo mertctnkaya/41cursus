@@ -6,13 +6,13 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:04:20 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/02 16:13:19 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:04:48 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./checker_bonus.h"
 
-static void	free_stack(t_node *node)
+void	free_stack(t_node *node)
 {
 	t_node	*temp;
 
@@ -24,16 +24,6 @@ static void	free_stack(t_node *node)
 		free(node);
 		node = temp;
 	}
-}
-
-void	raise_error(t_node *a, t_node *b)
-{
-	write(2, "Error\n", 6);
-	if (a)
-		free_stack(a);
-	if (b)
-		free_stack(b);
-	exit(1);
 }
 
 static int	apply_operation_per_line(t_stack *s, char *line)

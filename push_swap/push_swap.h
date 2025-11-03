@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:31:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/02 16:11:54 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:23:42 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ t_node	*parse_and_create_stack(int argc, char **argv, int *size);
 void	assign_index(t_node **node, int size);
 
 void	chunking_sort(t_stack *s);
-void	restore_by_max(t_stack *s);
-void	restore_final_sort(t_stack *s);
 
 void	sort_3(t_node **a);
 
@@ -62,7 +60,5 @@ void	rb(t_node **b, int cout);
 
 void	rra(t_node **a, int cout);
 void	rrb(t_node **b, int cout);
-
-
 
 #endif

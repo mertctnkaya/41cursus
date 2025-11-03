@@ -6,11 +6,21 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 14:48:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/02 16:13:45 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:22:46 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./checker_bonus.h"
+
+void	raise_error(t_node *a, t_node *b)
+{
+	write(2, "Error\n", 6);
+	if (a)
+		free_stack(a);
+	if (b)
+		free_stack(b);
+	exit(1);
+}
 
 int	is_sorted(t_node *node)
 {
