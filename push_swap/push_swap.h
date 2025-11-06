@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 14:31:06 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 13:43:56 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:33:18 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ void	raise_error(t_node *a, t_node *b, char **split_arr);
 char	**ft_split(const char *s, char c);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 
-void	parse_and_add(char *str_num, t_node **a, t_node **current,
-						int *size, char **split_arr);
-void	parse_split_and_add(char **split_arr, t_node **a, t_node **current,
-							int *size);
+void	parse_and_add_tokens(char *single, t_node **a,
+					t_node **current, int *size, char **split_arr);
 void	free_split_arr(char **split_arr);
 int		is_sorted(t_node *node);
 long	atol_check(const char *str, t_node *a, char **split_arr);

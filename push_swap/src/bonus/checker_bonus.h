@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:03:31 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 13:43:07 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:33:52 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	**ft_split(const char *s, char c);
 
 char	*ft_strchr(const char *s, int c);
-void	parse_and_add(char *str_num, t_node **a, t_node **current,
-							int *size, char **split_arr);
-void	parse_split_and_add(char **split_arr, t_node **a, t_node **current,
-						int *size);
+void	parse_and_add_tokens(char *single, t_node **a,
+					t_node **current, int *size, char **split_arr);
 void	free_split_arr(char **split_arr);
 
 void	raise_error(t_node *a, t_node *b, char **split_arr);

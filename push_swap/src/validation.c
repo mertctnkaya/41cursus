@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 13:36:12 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:41:17 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ t_node	*parse_and_create_stack(int argc, char **argv, int *size)
 		{
 			split_arr = ft_split(argv[i], ' ');
 			if (!split_arr)
-				raise_error(a, 0, NULL);
-			parse_split_and_add(split_arr, &a, &current, size);
+				raise_error(a, 0, split_arr);
+			parse_and_add_tokens(NULL, &a, &current, size, split_arr);
 			free_split_arr(split_arr);
 		}
 		else
-			parse_and_add(argv[i], &a, &current, size, NULL);
+			parse_and_add_tokens(argv[i], &a, &current, size, NULL);
 		i++;
 	}
 	return (a);

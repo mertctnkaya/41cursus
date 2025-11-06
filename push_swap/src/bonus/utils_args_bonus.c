@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:38:29 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 13:39:49 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:33:35 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,34 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	parse_and_add(char *str_num, t_node **a, t_node **current,
-							int *size, char **split_arr)
+void	parse_and_add_tokens(char *single, t_node **a,
+					t_node **current, int *size, char **split_arr)
 {
 	long	num;
+	int		i;
 	t_node	*new;
 
-	num = atol_check(str_num, *a, split_arr);
-	check_duplicates((int)num, *a, split_arr);
-	new = new_item((int)num, *a, split_arr);
-	append_item(a, current, new);
-	(*size)++;
-}
-
-void	parse_split_and_add(char **split_arr, t_node **a, t_node **current,
-						int *size)
-{
-	int i;
-
-	i = 0;
-	if (!split_arr)
-		return ;
-	while (split_arr[i])
-		parse_and_add(split_arr[i++], a, current, size, split_arr);
+	if (split_arr)
+	{
+		i = 0;
+		while (split_arr[i])
+		{
+			num = atol_check(split_arr[i], *a, split_arr);
+			check_duplicates((int)num, *a, split_arr);
+			new = new_item((int)num, *a, split_arr);
+			append_item(a, current, new);
+			(*size)++;
+			i++;
+		}
+	}
+	else if (single)
+	{
+		num = atol_check(single, *a, NULL);
+		check_duplicates((int)num, *a, NULL);
+		new = new_item((int)num, *a, NULL);
+		append_item(a, current, new);
+		(*size)++;
+	}
 }
 
 void	free_split_arr(char **split_arr)
