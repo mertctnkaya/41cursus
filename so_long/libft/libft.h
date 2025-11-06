@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecetink <mecetink@42student.kocaeli.co    +#+  +:+       +#+        */
+/*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:24:14 by mecetink          #+#    #+#             */
-/*   Updated: 2025/06/16 22:31:28 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/06 21:38:35 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# define BUFFER_SIZE 42
 
 # include <stddef.h>
 
@@ -20,6 +22,9 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+char	*get_next_line(int fd);
+char	*ft__strjoin(char *s1, const char *s2);
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);

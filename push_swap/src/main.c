@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:48:24 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 13:25:12 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/06 19:24:09 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	raise_error(t_node *a, t_node *b, char **split_arr)
 
 static void	push_swap(t_stack *s)
 {
-	if (s->total_size <= 1)
-		return ;
 	if (s->total_size == 2)
 		sa(&s->a, 1);
 	else if (s->total_size == 3)

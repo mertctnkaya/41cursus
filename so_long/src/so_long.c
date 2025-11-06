@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 20:11:47 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 20:12:00 by mecetink         ###   ########.fr       */
+/*   Created: 2025/11/06 20:11:04 by mecetink          #+#    #+#             */
+/*   Updated: 2025/11/06 21:52:52 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "../includes/so_long.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "../minilibx-linux/mlx.h"
-
-#endif
+int	main()
+{
+    
+    return (0);
+}
