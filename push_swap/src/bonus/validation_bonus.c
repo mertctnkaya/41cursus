@@ -6,19 +6,19 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/02 16:09:35 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/06 13:44:24 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./checker_bonus.h"
 
-static t_node	*new_item(int num)
+t_node	*new_item(int num, t_node *a, char **split_arr)
 {
 	t_node	*new;
 
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
-		raise_error(0, 0);
+		raise_error(a, 0, split_arr);
 	new->prev = 0;
 	new->next = 0;
 	new->index = -1;
@@ -26,20 +26,20 @@ static t_node	*new_item(int num)
 	return (new);
 }
 
-static void	check_duplicates(t_node *node, int value)
+void	check_duplicates(int value, t_node *a, char **split_arr)
 {
 	t_node	*current;
 
-	current = node;
+	current = a;
 	while (current)
 	{
 		if (current->value == value)
-			raise_error(node, 0);
+			raise_error(a, 0, split_arr);
 		current = current->next;
 	}
 }
 
-static void	append_item(t_node **a, t_node **current, t_node *item)
+void	append_item(t_node **a, t_node **current, t_node *item)
 {
 	if (!*a)
 		*a = item;
@@ -55,9 +55,8 @@ t_node	*parse_and_create_stack(int argc, char **argv, int *size)
 {
 	t_node	*a;
 	t_node	*current;
-	t_node	*new;
-	long	num;
 	int		i;
+	char	**split_arr;
 
 	a = NULL;
 	current = NULL;
@@ -65,19 +64,22 @@ t_node	*parse_and_create_stack(int argc, char **argv, int *size)
 	*size = 0;
 	while (i < argc)
 	{
-		num = atol_check(argv[i], a);
-		check_duplicates(a, (int)num);
-		new = new_item((int)num);
-		if (!new)
-			raise_error(a, 0);
-		append_item(&a, &current, new);
-		(*size)++;
+		if (ft_strchr(argv[i], ' '))
+		{
+			split_arr = ft_split(argv[i], ' ');
+			if (!split_arr)
+				raise_error(a, 0, NULL);
+			parse_split_and_add(split_arr, &a, &current, size);
+			free_split_arr(split_arr);
+		}
+		else
+			parse_and_add(argv[i], &a, &current, size, NULL);
 		i++;
 	}
 	return (a);
 }
 
-void	assign_index(t_node **node, int size)
+void	assign_index(t_node **stack, int size)
 {
 	t_node	*cur;
 	t_node	*lowest;
@@ -87,7 +89,7 @@ void	assign_index(t_node **node, int size)
 	while (index < size)
 	{
 		lowest = NULL;
-		cur = *node;
+		cur = *stack;
 		while (cur)
 		{
 			if (cur->index == -1 && (!lowest || cur->value < lowest->value))

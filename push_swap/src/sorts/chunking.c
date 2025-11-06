@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 20:09:52 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/03 14:23:39 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/03 20:38:11 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static int	find_max_pos(t_node *node)
 	int		max;
 	t_node	*cur;
 
-	if (!node)
-		return (0);
 	cur = node;
 	max = cur->index;
 	max_pos = 0;
@@ -72,18 +70,6 @@ static void	push_by_chunk(t_stack *s, int *target, int chunk)
 		ra(&s->a, 1);
 }
 
-static void	restore_by_max(t_stack *s)
-{
-	int	pos;
-
-	while (s->size_b > 0)
-	{
-		pos = find_max_pos(s->b);
-		rotate_b_to_top(s, pos);
-		pa(s, 1);
-	}
-}
-
 void	chunking_sort(t_stack *s)
 {
 	int	target;
@@ -96,5 +82,9 @@ void	chunking_sort(t_stack *s)
 	target = 0;
 	while (s->size_a > 0)
 		push_by_chunk(s, &target, chunk);
-	restore_by_max(s);
+	while (s->size_b > 0)
+	{
+		rotate_b_to_top(s, find_max_pos(s->b));
+		pa(s, 1);
+	}
 }

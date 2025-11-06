@@ -6,7 +6,7 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:04:20 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/03 15:04:48 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/06 03:24:18 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	check_lines(t_stack s)
 		if (!apply_operation_per_line(&s, line))
 		{
 			free(line);
-			raise_error(s.a, s.b);
+			raise_error(s.a, s.b, 0);
 		}
 		free(line);
 		line = read_line_stdin();

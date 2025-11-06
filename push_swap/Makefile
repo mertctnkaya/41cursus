@@ -1,24 +1,19 @@
 NAME		= push_swap
 BONUS_NAME	= checker
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
-DEBUG		= 0
-
-ifeq ($(DEBUG), 1)
-	CFLAGS += -g -fsanitize=address,leak
-endif
+CFLAGS		= -Wall -Wextra -Werror -g
 
 SRC_FILES	= \
 	src/main.c						\
 	src/validation.c				\
 	src/utils.c						\
+	src/split.c						\
 	\
 	src/operations/swap.c			\
 	src/operations/push.c			\
 	src/operations/rotate.c			\
 	src/operations/rrotate.c		\
 	\
-	src/sorts/small.c				\
 	src/sorts/medium.c				\
 	\
 	src/sorts/chunking.c
@@ -27,7 +22,9 @@ CHC_FILES	= \
 	src/bonus/main_bonus.c			\
 	src/bonus/extra_ops_bonus.c		\
 	src/bonus/utils_bonus.c			\
+	src/bonus/utils_args_bonus.c	\
 	src/bonus/validation_bonus.c	\
+	src/bonus/split_bonus.c			\
 	\
 	src/operations/push.c			\
 	src/operations/rotate.c			\

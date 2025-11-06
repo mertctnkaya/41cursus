@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_args_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/26 23:11:18 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 13:37:53 by mecetink         ###   ########.fr       */
+/*   Created: 2025/11/06 13:38:29 by mecetink          #+#    #+#             */
+/*   Updated: 2025/11/06 13:39:49 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "./checker_bonus.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (1)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		if (*s == 0)
+			break ;
+		s++;
+	}
+	return (NULL);
+}
 
 void	parse_and_add(char *str_num, t_node **a, t_node **current,
 							int *size, char **split_arr)
@@ -49,46 +62,4 @@ void	free_split_arr(char **split_arr)
 		i++;
 	}
 	free(split_arr);
-}
-
-int	is_sorted(t_node *node)
-{
-	if (!node)
-		return (1);
-	while (node->next)
-	{
-		if (node->index > node->next->index)
-			return (0);
-		node = node->next;
-	}
-	return (1);
-}
-
-long	atol_check(const char *str, t_node *a, char **split_arr)
-{
-	long	res;
-	int		sign;
-
-	res = 0;
-	sign = 1;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	if (!(*str >= 48 && *str <= 57))
-		raise_error(a, 0, split_arr);
-	while ((*str >= 48 && *str <= 57))
-	{
-		res = res * 10 + (*str - '0');
-		if ((unsigned long)res > (unsigned long)2147483647 + (sign < 0))
-			raise_error(a, 0, split_arr);
-		str++;
-	}
-	if (*str != '\0')
-		raise_error(a, 0, split_arr);
-	return (res * sign);
 }
