@@ -6,24 +6,11 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:48:24 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 19:24:09 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/07 13:44:26 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (1)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		if (*s == 0)
-			break ;
-		s++;
-	}
-	return (NULL);
-}
 
 static void	free_stack(t_node *node)
 {
@@ -56,7 +43,7 @@ void	raise_error(t_node *a, t_node *b, char **split_arr)
 			free(split_arr[i]);
 			i++;
 		}
-		free(split_arr);	
+		free(split_arr);
 	}
 	exit(1);
 }

@@ -1,55 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_bonus.c                                      :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 01:37:36 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 13:41:00 by mecetink         ###   ########.fr       */
+/*   Created: 2025/06/04 20:26:32 by mecetink          #+#    #+#             */
+/*   Updated: 2025/11/07 13:52:39 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./checker_bonus.h"
-
-static size_t	ft_strlen(const char *s)
-{
-	const char	*start;
-
-	start = s;
-	while (*s)
-		s++;
-	return (s - start);
-}
-
-char	*ft_substr(const char *s, unsigned int start, size_t len)
-{
-	char	*copy;
-	size_t	i;
-
-	if (start >= (unsigned int)ft_strlen(s))
-	{
-		copy = (char *) malloc(sizeof(char));
-		if (!copy)
-			return (NULL);
-		copy[0] = 0;
-		return (copy);
-	}
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	copy = (char *) malloc(sizeof(char) * (len + 1));
-	if (!copy)
-		return (NULL);
-	s = s + start;
-	i = 0;
-	while (i < len && s[i])
-	{
-		copy[i] = s[i];
-		i++;
-	}
-	copy[i] = 0;
-	return (copy);
-}
+#include "libft.h"
+#include <stdlib.h>
 
 static int	add_word(char **arr, const char *s, int word_len, int index)
 {

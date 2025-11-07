@@ -3,11 +3,14 @@ BONUS_NAME	= checker
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
 
+LIBFT_DIR	= ./libft
+LIBFT		= $(LIBFT_DIR)/libft.a
+LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
+
 SRC_FILES	= \
 	src/main.c						\
 	src/validation.c				\
 	src/utils.c						\
-	src/split.c						\
 	\
 	src/operations/swap.c			\
 	src/operations/push.c			\
@@ -24,7 +27,6 @@ CHC_FILES	= \
 	src/bonus/utils_bonus.c			\
 	src/bonus/utils_args_bonus.c	\
 	src/bonus/validation_bonus.c	\
-	src/bonus/split_bonus.c			\
 	\
 	src/operations/push.c			\
 	src/operations/rotate.c			\
@@ -40,21 +42,26 @@ all: $(NAME)
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(CHC_OBJS)
-	$(CC) $(CFLAGS) $(CHC_OBJS) -o $(BONUS_NAME)
+	$(CC) $(CFLAGS) $(CHC_OBJS) $(LIBFT_FLAGS) -o $(BONUS_NAME)
 
-$(NAME): $(SRC_OBJS)
-	$(CC) $(CFLAGS) $(SRC_OBJS) -o $(NAME)
+$(NAME): $(SRC_OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(SRC_OBJS) $(LIBFT_FLAGS) -o $(NAME)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(OBJ_DIR)/%.o: src/%.c
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f $(BONUS_NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

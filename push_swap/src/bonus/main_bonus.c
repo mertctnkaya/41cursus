@@ -6,11 +6,12 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:04:20 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 03:24:18 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/07 14:59:32 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./checker_bonus.h"
+#include "../../libft/libft.h"
 
 void	free_stack(t_node *node)
 {
@@ -28,27 +29,27 @@ void	free_stack(t_node *node)
 
 static int	apply_operation_per_line(t_stack *s, char *line)
 {
-	if (!ft_strcmp(line, "sa\n") || !ft_strcmp(line, "sa"))
+	if (ft_strcmp(line, "sa\n") == 0 || ft_strcmp(line, "sa") == 0)
 		sa(&s->a, 0);
-	else if (!ft_strcmp(line, "sb\n") || !ft_strcmp(line, "sb"))
+	else if (ft_strcmp(line, "sb\n") == 0 || ft_strcmp(line, "sb") == 0)
 		sb(&s->b, 0);
-	else if (!ft_strcmp(line, "ss\n") || !ft_strcmp(line, "ss"))
+	else if (ft_strcmp(line, "ss\n") == 0 || ft_strcmp(line, "ss") == 0)
 		ss(&s->a, &s->b, 0);
-	else if (!ft_strcmp(line, "pa\n") || !ft_strcmp(line, "pa"))
+	else if (ft_strcmp(line, "pa\n") == 0 || ft_strcmp(line, "pa") == 0)
 		pa(s, 0);
-	else if (!ft_strcmp(line, "pb\n") || !ft_strcmp(line, "pb"))
+	else if (ft_strcmp(line, "pb\n") == 0 || ft_strcmp(line, "pb") == 0)
 		pb(s, 0);
-	else if (!ft_strcmp(line, "ra\n") || !ft_strcmp(line, "ra"))
+	else if (ft_strcmp(line, "ra\n") == 0 || ft_strcmp(line, "ra") == 0)
 		ra(&s->a, 0);
-	else if (!ft_strcmp(line, "rb\n") || !ft_strcmp(line, "rb"))
+	else if (ft_strcmp(line, "rb\n") == 0 || ft_strcmp(line, "rb") == 0)
 		rb(&s->b, 0);
-	else if (!ft_strcmp(line, "rr\n") || !ft_strcmp(line, "rr"))
+	else if (ft_strcmp(line, "rr\n") == 0 || ft_strcmp(line, "rr") == 0)
 		rr(&s->a, &s->b, 0);
-	else if (!ft_strcmp(line, "rra\n") || !ft_strcmp(line, "rra"))
+	else if (ft_strcmp(line, "rra\n") == 0 || ft_strcmp(line, "rra") == 0)
 		rra(&s->a, 0);
-	else if (!ft_strcmp(line, "rrb\n") || !ft_strcmp(line, "rrb"))
+	else if (ft_strcmp(line, "rrb\n") == 0 || ft_strcmp(line, "rrb") == 0)
 		rrb(&s->b, 0);
-	else if (!ft_strcmp(line, "rrr\n") || !ft_strcmp(line, "rrr"))
+	else if (ft_strcmp(line, "rrr\n") == 0 || ft_strcmp(line, "rrr") == 0)
 		rrr(&s->a, &s->b, 0);
 	else
 		return (0);

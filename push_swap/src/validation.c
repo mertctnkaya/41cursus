@@ -6,11 +6,12 @@
 /*   By: mecetink <mecetink@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:47:55 by mecetink          #+#    #+#             */
-/*   Updated: 2025/11/06 18:41:17 by mecetink         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:12:27 by mecetink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+#include "../libft/libft.h"
 
 t_node	*new_item(int num, t_node *a, char **split_arr)
 {
@@ -69,11 +70,11 @@ t_node	*parse_and_create_stack(int argc, char **argv, int *size)
 			split_arr = ft_split(argv[i], ' ');
 			if (!split_arr)
 				raise_error(a, 0, split_arr);
-			parse_and_add_tokens(NULL, &a, &current, size, split_arr);
+			parse_split(split_arr, &a, &current, size);
 			free_split_arr(split_arr);
 		}
 		else
-			parse_and_add_tokens(argv[i], &a, &current, size, NULL);
+			parse_arg(argv[i], &a, &current, size);
 		i++;
 	}
 	return (a);
